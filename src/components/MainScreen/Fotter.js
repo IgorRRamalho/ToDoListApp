@@ -1,8 +1,9 @@
 import React from "react";
 import { TextInput, View, Text, StyleSheet, Image } from "react-native";
 import ButonnAdd from "./ButonnAdd";
+import { Lato_400Regular } from "@expo-google-fonts/lato";
 
-export default function Footer() {
+export default function Fotter() {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.viewTab}>
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     fontSize: 12,
     color: "white",
-    fontWeight: 400,
+    fontFamily: 'Lato_400Regular',
   },
   imgSize: {
     width: 24,

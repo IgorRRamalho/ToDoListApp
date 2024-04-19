@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput, View, Text, StyleSheet, Image } from "react-native";
+import { Lato_400Regular } from "@expo-google-fonts/lato";
 
 export default function Main() {
   return (
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white", 
     fontWeight: 400,
+    fontFamily: 'Lato_400Regular',
   },
   mainImg: {
     width: 227, 

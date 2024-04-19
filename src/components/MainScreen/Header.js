@@ -33,13 +33,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 10,
+    
   },
   headerText: {
     flex: 1,
     textAlign: "center",
     fontSize: 25,
     color: "white", 
-    fontWeight: 500,
+    fontFamily: 'Lato_400Regular',
   },
   headerImg: {
     width: 42, 
