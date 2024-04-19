@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#363636',
   },
   headerText: {
-    fontFamily: 'Lato_700Bold',
-
+   
   },
 });
