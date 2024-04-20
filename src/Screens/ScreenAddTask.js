@@ -1,9 +1,11 @@
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, Dimensions } from "react-native";
 import HeaderAddTask from "../components/AddTask/HeaderAddTask";
 import MainAddTask from "../components/AddTask/MainAddTask";
 
-export default function ScreenAddTask() {
+const { height } = Dimensions.get('window');
 
+
+export default function ScreenAddTask() {
 
   return (
     <View style={styles.containerAddTask}>
@@ -19,5 +21,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#979797",
     top: '60%',
   },
- 
 });
