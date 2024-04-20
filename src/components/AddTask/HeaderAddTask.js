@@ -12,10 +12,10 @@ export default function HeaderAddTask() {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flexDirection: "row",
+   /*  flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 10,
-    backgroundColor: '#363636',
+    backgroundColor: '#363636', */
   },
   headerText: {
    

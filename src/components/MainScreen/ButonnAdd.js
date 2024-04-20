@@ -18,7 +18,13 @@ export default function ButonnAdd() {
     setShowAddTask(true);
   };
   
+
+
   const navigation = useNavigation();
+
+  {showAddTask && (
+    navigation.navigate('AddTaskScreen')
+  )}
   
   return (
     // <TouchableOpacity onPress={() => navigation.navigate('AddTaskScreen')}>
@@ -29,7 +35,7 @@ export default function ButonnAdd() {
           style={styles.imgSize}
         />
       </View>
-      {showAddTask && <ScreenAddTask onClose={() => setShowAddTask(false)} />}
+     
     </TouchableOpacity>
   );
 
