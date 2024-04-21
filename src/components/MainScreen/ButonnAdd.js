@@ -12,22 +12,15 @@ import ScreenAddTask from "../../Screens/ScreenAddTask";
 const { width, height } = Dimensions.get("window");
 
 export default function ButonnAdd() {
-  const [showAddTask, setShowAddTask] = useState(false);
-
+  const [addTaskVisible, setAddTaskVisible] = useState(false);
+  
   const handlePress = () => {
-    setShowAddTask(true);
+    setAddTaskVisible(true);
   };
-  
 
 
-  const navigation = useNavigation();
-
-  {showAddTask && (
-    navigation.navigate('AddTaskScreen')
-  )}
-  
   return (
-    // <TouchableOpacity onPress={() => navigation.navigate('AddTaskScreen')}>
+    <>
     <TouchableOpacity onPress={handlePress}>
       <View style={styles.circle}>
         <Image
@@ -35,11 +28,10 @@ export default function ButonnAdd() {
           style={styles.imgSize}
         />
       </View>
-     
     </TouchableOpacity>
+    {addTaskVisible && <ScreenAddTask closeModal={() => setAddTaskVisible(false)} />}
+  </>
   );
-
- 
 }
 
 const styles = StyleSheet.create({

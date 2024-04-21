@@ -12,12 +12,11 @@ export default function HeaderAddTask() {
 
 const styles = StyleSheet.create({
   headerContainer: {
-   /*  flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    backgroundColor: '#363636', */
+   
   },
   headerText: {
-   
+   fontFamily: 'Lato_700Bold',
+   color: 'white',
+   fontSize: 20,
   },
 });
