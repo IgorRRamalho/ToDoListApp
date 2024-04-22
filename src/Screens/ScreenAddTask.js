@@ -39,17 +39,12 @@ export default function ScreenAddTask({ closeModal }) {
           transparent={true}
           onRequestClose={closeModal}
         >
-          <TouchableOpacity
-            style={styles.modalBackground}
-            onPress={() => {
-              Keyboard.dismiss();
-              closeModal();
-            }}
-          >
+          <TouchableOpacity style={styles.modalBackground} activeOpacity={1}>
             <View style={styles.modalContainer}>
-              <Text style={styles.headerText}>Add Task</Text>
+              <TouchableOpacity onPress={closeModal}>
+                <Text style={styles.headerText}>Add Task</Text>
+              </TouchableOpacity>
             </View>
-
             <View style={styles.mainContainer}>
               <TextInput
                 ref={textInputRef}
@@ -61,13 +56,12 @@ export default function ScreenAddTask({ closeModal }) {
 
               <TextInput
                 style={styles.textStyle}
-                ref={textInputRef}
                 placeholder=" Description"
                 placeholderTextColor={"#AFAFAF"}
               ></TextInput>
             </View>
 
-            <View style={[styles.viewButtons, {marginLeft: -24}]}>
+            <View style={[styles.viewButtons, { marginLeft: -24 }]}>
               <Image
                 source={require("../../assets/timer01.png")}
                 style={styles.fotterImg}
@@ -82,7 +76,7 @@ export default function ScreenAddTask({ closeModal }) {
               />
               <Image
                 source={require("../../assets/send04.png")}
-                style={[styles.fotterImg, {marginLeft: 160}]}
+                style={[styles.fotterImg, { marginLeft: 160 }]}
               />
             </View>
           </TouchableOpacity>
@@ -95,6 +89,7 @@ export default function ScreenAddTask({ closeModal }) {
 const styles = StyleSheet.create({
   containerAddTask: {
     flex: 1, // Definindo para ocupar metade da tela
+    backgroundColor: 'black'
   },
   modalBackground: {
     flex: 1, // Definindo para ocupar metade da tela
@@ -105,11 +100,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     padding: 25,
   },
-  modalContainer: {},
+  modalContainer: {
+    width: 81,
+  },
   headerText: {
     fontFamily: "Lato_700Bold",
     color: "white",
     fontSize: 20,
+    width: 81,
   },
   mainContainer: {
     paddingTop: 20,
@@ -122,6 +120,7 @@ const styles = StyleSheet.create({
     // height: 43,
     // width: "100%",
   },
+
   InputStyle: {
     height: 43,
     width: "100%",
@@ -142,11 +141,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     paddingTop: 40,
-    
   },
   fotterImg: {
     height: 24,
     width: 24,
-    marginHorizontal: 24
+    marginHorizontal: 24,
   },
 });
