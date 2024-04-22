@@ -13,16 +13,21 @@ import {
   Image,
 } from "react-native";
 import TaskPriorityScreen from "./TaskPriorityScreen";
+import CategoryScreen from "./CategoryScrenn";
 import Quadrados from "../components/TaskPriorityScreen/Quadrados";
 
- const { height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 export default function ScreenAddTask({ closeModal }) {
   const [TaskPriority, setTaskPriority] = useState(false);
-  
+  const [TaskCategory, setTaskCategory] = useState(false);
 
   const handlePressTaskPriority = () => {
     setTaskPriority(true);
+  };
+
+  const handlePressTaskCategory = () => {
+    setTaskCategory(true);
   };
 
   const textInputRef = useRef(null);
@@ -78,12 +83,15 @@ export default function ScreenAddTask({ closeModal }) {
                     style={styles.fotterImg}
                   />
                 </TouchableOpacity>
-                
-                <TouchableOpacity>
+
+                <TouchableOpacity onPress={handlePressTaskCategory}>
                   <Image
                     source={require("../../assets/tag02.png")}
                     style={styles.fotterImg}
                   />
+                  {TaskCategory && (
+                    <CategoryScreen closeModal={() => setTaskCategory(false)} />
+                  )}
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={handlePressTaskPriority}>
@@ -91,9 +99,12 @@ export default function ScreenAddTask({ closeModal }) {
                     source={require("../../assets/flag03.png")}
                     style={[styles.fotterImg]}
                   />
-                {TaskPriority && <TaskPriorityScreen closeModal={() => setTaskPriority(false)} />}
+                  {TaskPriority && (
+                    <TaskPriorityScreen
+                      closeModal={() => setTaskPriority(false)}
+                    />
+                  )}
                 </TouchableOpacity>
-                
 
                 <TouchableOpacity>
                   <Image
