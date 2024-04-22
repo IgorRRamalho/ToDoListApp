@@ -17,6 +17,7 @@ export default function Main() {
         <Text style={[styles.mainText, {paddingTop: 50}]}> What do you want to do today?</Text>
         <Text style={[styles.mainText, {paddingTop: 15}, {fontSize: 16}]}> Tap + to add your tasks</Text>
       </View>
+
       
     </View>
   );
@@ -48,4 +49,5 @@ const styles = StyleSheet.create({
   viewTxt: {
     flex: 1
   }
+  
 });
