@@ -1,37 +1,40 @@
 import {
   Dimensions,
-  KeyboardAvoidingView,
   Modal,
-  Platform,
   StyleSheet,
+  Text,
+  TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
-import HeaderAddTask from "../components/AddTask/HeaderAddTask";
-import MainAddTask from "../components/AddTask/MainAddTask";
 
 const { height } = Dimensions.get("window");
 
 export default function ScreenAddTask({ closeModal }) {
   return (
     <View style={styles.containerAddTask}>
-      <KeyboardAvoidingView
-        behavior="height"
-        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        onRequestClose={closeModal}
       >
-        <Modal
-          animationType="slide"
-          transparent={true}
-          onRequestClose={closeModal}
-        >
-          <TouchableOpacity style={styles.modalBackground} onPress={closeModal}>
-            <View style={styles.modalContainer}>
-              <HeaderAddTask />
-              <MainAddTask />
-            </View>
-          </TouchableOpacity>
-        </Modal>
-      </KeyboardAvoidingView>
+        <TouchableOpacity style={styles.modalBackground} onPress={closeModal}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.headerText}>Add Task</Text>
+          </View>
+         
+          <View style={styles.mainContainer}>
+            <TextInput
+              style={styles.InputStyle}
+              placeholder=" Do math homework"
+              placeholderTextColor={"white"}
+            ></TextInput>
+
+            <Text style={styles.textStyle}> Description</Text>
+          </View>
+        
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 }
@@ -50,4 +53,30 @@ const styles = StyleSheet.create({
     padding: 25,
   },
   modalContainer: {},
+  headerText: {
+    fontFamily: "Lato_700Bold",
+    color: "white",
+    fontSize: 20,
+  },
+  mainContainer: {
+    paddingTop: 20,
+  },
+  textStyle: {
+    color: "#AFAFAF",
+    fontFamily: "Lato_400Regular",
+    fontSize: 18,
+    paddingTop: 16,
+  },
+  InputStyle: {
+    height: 43,
+    width: "100%",
+    fontFamily: "Lato_400Regular",
+    color: "white",
+    fontSize: 18,
+
+    borderColor: "white",
+    borderWidth: 1, // largura da borda
+    padding: 10, // preenchimento interno
+    borderRadius: 8,
+  },
 });

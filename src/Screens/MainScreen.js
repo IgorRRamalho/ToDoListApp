@@ -10,12 +10,12 @@ import { useState } from "react";
 export default function MainScreen() {
 
     return (
+      
       <View style={styles.containerMain}>
         {/* <StatusBar barStyle="default"/> */}
         <Header />
         <Main />
         <Fotter />
-
       </View>
     );
   }
