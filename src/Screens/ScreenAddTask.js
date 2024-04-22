@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Dimensions,
   Modal,
@@ -12,10 +12,19 @@ import {
   Keyboard,
   Image,
 } from "react-native";
+import TaskPriorityScreen from "./TaskPriorityScreen";
+import Quadrados from "../components/TaskPriorityScreen/Quadrados";
 
-const { height } = Dimensions.get("window");
+ const { height } = Dimensions.get("window");
 
 export default function ScreenAddTask({ closeModal }) {
+  const [TaskPriority, setTaskPriority] = useState(false);
+  
+
+  const handlePressTaskPriority = () => {
+    setTaskPriority(true);
+  };
+
   const textInputRef = useRef(null);
 
   useEffect(() => {
@@ -63,22 +72,35 @@ export default function ScreenAddTask({ closeModal }) {
               </View>
 
               <View style={[styles.viewButtons, { marginLeft: -24 }]}>
-                <Image
-                  source={require("../../assets/timer01.png")}
-                  style={styles.fotterImg}
-                />
-                <Image
-                  source={require("../../assets/tag02.png")}
-                  style={styles.fotterImg}
-                />
-                <Image
-                  source={require("../../assets/flag03.png")}
-                  style={[styles.fotterImg]}
-                />
-                <Image
-                  source={require("../../assets/send04.png")}
-                  style={[styles.fotterImg, { marginLeft: 160 }]}
-                />
+                <TouchableOpacity>
+                  <Image
+                    source={require("../../assets/timer01.png")}
+                    style={styles.fotterImg}
+                  />
+                </TouchableOpacity>
+                
+                <TouchableOpacity>
+                  <Image
+                    source={require("../../assets/tag02.png")}
+                    style={styles.fotterImg}
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={handlePressTaskPriority}>
+                  <Image
+                    source={require("../../assets/flag03.png")}
+                    style={[styles.fotterImg]}
+                  />
+                {TaskPriority && <TaskPriorityScreen closeModal={() => setTaskPriority(false)} />}
+                </TouchableOpacity>
+                
+
+                <TouchableOpacity>
+                  <Image
+                    source={require("../../assets/send04.png")}
+                    style={[styles.fotterImg, { marginLeft: 160 }]}
+                  />
+                </TouchableOpacity>
               </View>
             </TouchableOpacity>
           </View>

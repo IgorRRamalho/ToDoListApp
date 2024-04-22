@@ -13,25 +13,25 @@ const { width, height } = Dimensions.get("window");
 
 export default function ButonnAdd() {
   const [addTaskVisible, setAddTaskVisible] = useState(false);
-  
-  
+
   const handlePress = () => {
     setAddTaskVisible(true);
   };
 
-
   return (
     <>
-    <TouchableOpacity onPress={handlePress}>
-      <View style={styles.circle}>
-        <Image
-          source={require("../../../assets/home-button.png")}
-          style={styles.imgSize}
-        />
-      </View>
-    </TouchableOpacity>
-    {addTaskVisible && <ScreenAddTask closeModal={() => setAddTaskVisible(false)} />}
-  </>
+      <TouchableOpacity onPress={handlePress}>
+        <View style={styles.circle}>
+          <Image
+            source={require("../../../assets/home-button.png")}
+            style={styles.imgSize}
+          />
+        </View>
+      </TouchableOpacity>
+      {addTaskVisible && (
+        <ScreenAddTask closeModal={() => setAddTaskVisible(false)} />
+      )}
+    </>
   );
 }
 
