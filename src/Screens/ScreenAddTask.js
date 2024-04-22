@@ -32,7 +32,6 @@ export default function ScreenAddTask({ closeModal }) {
 
             <Text style={styles.textStyle}> Description</Text>
           </View>
-        
         </TouchableOpacity>
       </Modal>
     </View>
@@ -73,7 +72,6 @@ const styles = StyleSheet.create({
     fontFamily: "Lato_400Regular",
     color: "white",
     fontSize: 18,
-
     borderColor: "white",
     borderWidth: 1, // largura da borda
     padding: 10, // preenchimento interno
