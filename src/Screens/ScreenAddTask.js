@@ -39,47 +39,49 @@ export default function ScreenAddTask({ closeModal }) {
           transparent={true}
           onRequestClose={closeModal}
         >
-          <TouchableOpacity style={styles.modalBackground} activeOpacity={1}>
-            <View style={styles.modalContainer}>
-              <TouchableOpacity onPress={closeModal}>
-                <Text style={styles.headerText}>Add Task</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.mainContainer}>
-              <TextInput
-                ref={textInputRef}
-                style={styles.InputStyle}
-                placeholder=" Do math homework"
-                placeholderTextColor={"white"}
-                onSubmitEditing={closeModal}
-              ></TextInput>
+          <View style={styles.viewModal}>
+            <TouchableOpacity style={styles.modalBackground} activeOpacity={1}>
+              <View style={styles.modalContainer}>
+                <TouchableOpacity onPress={closeModal}>
+                  <Text style={styles.headerText}>Add Task</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.mainContainer}>
+                <TextInput
+                  ref={textInputRef}
+                  style={styles.InputStyle}
+                  placeholder=" Do math homework"
+                  placeholderTextColor={"white"}
+                  onSubmitEditing={closeModal}
+                ></TextInput>
 
-              <TextInput
-                style={styles.textStyle}
-                placeholder=" Description"
-                placeholderTextColor={"#AFAFAF"}
-              ></TextInput>
-            </View>
+                <TextInput
+                  style={styles.textStyle}
+                  placeholder=" Description"
+                  placeholderTextColor={"#AFAFAF"}
+                ></TextInput>
+              </View>
 
-            <View style={[styles.viewButtons, { marginLeft: -24 }]}>
-              <Image
-                source={require("../../assets/timer01.png")}
-                style={styles.fotterImg}
-              />
-              <Image
-                source={require("../../assets/tag02.png")}
-                style={styles.fotterImg}
-              />
-              <Image
-                source={require("../../assets/flag03.png")}
-                style={[styles.fotterImg]}
-              />
-              <Image
-                source={require("../../assets/send04.png")}
-                style={[styles.fotterImg, { marginLeft: 160 }]}
-              />
-            </View>
-          </TouchableOpacity>
+              <View style={[styles.viewButtons, { marginLeft: -24 }]}>
+                <Image
+                  source={require("../../assets/timer01.png")}
+                  style={styles.fotterImg}
+                />
+                <Image
+                  source={require("../../assets/tag02.png")}
+                  style={styles.fotterImg}
+                />
+                <Image
+                  source={require("../../assets/flag03.png")}
+                  style={[styles.fotterImg]}
+                />
+                <Image
+                  source={require("../../assets/send04.png")}
+                  style={[styles.fotterImg, { marginLeft: 160 }]}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
         </Modal>
       </View>
     </KeyboardAvoidingView>
@@ -89,13 +91,14 @@ export default function ScreenAddTask({ closeModal }) {
 const styles = StyleSheet.create({
   containerAddTask: {
     flex: 1, // Definindo para ocupar metade da tela
-    backgroundColor: 'black'
+    backgroundColor: "black",
   },
   modalBackground: {
     flex: 1, // Definindo para ocupar metade da tela
     flexDirection: "column",
     backgroundColor: "#363636",
-    top: 350,
+
+    marginTop: 350,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     padding: 25,
@@ -146,5 +149,12 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
     marginHorizontal: 24,
+  },
+  viewModal: {
+    margin: 0,
+    padding: 0,
+    height: "100%",
+    width: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
 });
