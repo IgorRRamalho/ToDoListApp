@@ -1,31 +1,25 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import Header from "../components/MainScreen/Header";
-import Main from "../components/MainScreen/Main";
-import Fotter from "../components/MainScreen/Fotter";
-import { useState } from "react";
-
-
+import Header from "../MainScreen/Header";
+import Fotter from "../MainScreen/Fotter";
+import Main from "../MainScreen/Main";
+import { StyleSheet, View } from "react-native";
 
 export default function MainScreen() {
+  return (
+    <View style={styles.containerMain}>
+      {/* <StatusBar barStyle="default"/> */}
+      < Header/>
+      <Main />
+      <Fotter />
+    </View>
+  );
+}
 
-    return (
-      
-      <View style={styles.containerMain}>
-        {/* <StatusBar barStyle="default"/> */}
-        <Header />
-        <Main />
-        <Fotter />
-      </View>
-    );
-  }
-
-  const styles = StyleSheet.create({
-    containerMain: {
-      flex: 1,
-      justifyContent: "flex-start",
-      alignItems: "center",
-      paddingTop: 70,
-      backgroundColor: "#121212",
-    },
+const styles = StyleSheet.create({
+  containerMain: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingTop: 70,
+    backgroundColor: "#121212",
+  },
 });

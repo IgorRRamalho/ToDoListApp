@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
   Dimensions,
   Image,
+  StyleSheet,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import ScreenAddTask from "../../Screens/ScreenAddTask";
-const { width, height } = Dimensions.get("window");
+import ScreenAddTask from "../Screens/ScreenAddTask";
+
+const { height } = Dimensions.get("window");
 
 export default function ButonnAdd() {
   const [addTaskVisible, setAddTaskVisible] = useState(false);
@@ -23,7 +22,7 @@ export default function ButonnAdd() {
       <TouchableOpacity onPress={handlePress}>
         <View style={styles.circle}>
           <Image
-            source={require("../../../assets/home-button.png")}
+            source={require("../../assets/Home Screen/button Add Task.png")}
             style={styles.imgSize}
           />
         </View>

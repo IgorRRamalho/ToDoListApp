@@ -1,31 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import {
   Dimensions,
+  Image,
+  KeyboardAvoidingView,
   Modal,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  KeyboardAvoidingView,
-  Platform,
-  Keyboard,
-  Image,
 } from "react-native";
+import CategoryScreen from "./CategoryScrenn";
 import TaskPriorityScreen from "./TaskPriorityScreen";
-import Quadrados from "../components/TaskPriorityScreen/Quadrados";
-
- const { height } = Dimensions.get("window");
 
 export default function ScreenAddTask({ closeModal }) {
   const [TaskPriority, setTaskPriority] = useState(false);
-  
+  const [TaskCategory, setTaskCategory] = useState(false);
+  const textInputRef = useRef(null);
 
   const handlePressTaskPriority = () => {
     setTaskPriority(true);
   };
 
-  const textInputRef = useRef(null);
+  const handlePressTaskCategory = () => {
+    setTaskCategory(true);
+  };
 
   useEffect(() => {
     // Foca no TextInput assim que o modal for aberto
@@ -35,6 +35,7 @@ export default function ScreenAddTask({ closeModal }) {
 
     return () => clearTimeout(timer);
   }, []);
+
 
   return (
     <KeyboardAvoidingView
@@ -61,12 +62,15 @@ export default function ScreenAddTask({ closeModal }) {
                   style={styles.InputStyle}
                   placeholder=" Do math homework"
                   placeholderTextColor={"white"}
-                  onSubmitEditing={closeModal}
+                  // value={textInputRef}
+                  // onChangeText={setTitle}
                 ></TextInput>
 
                 <TextInput
                   style={styles.textStyle}
                   placeholder=" Description"
+                  // value={description}
+                  // onChangeText={setDescription}
                   placeholderTextColor={"#AFAFAF"}
                 ></TextInput>
               </View>
@@ -74,30 +78,36 @@ export default function ScreenAddTask({ closeModal }) {
               <View style={[styles.viewButtons, { marginLeft: -24 }]}>
                 <TouchableOpacity>
                   <Image
-                    source={require("../../assets/timer01.png")}
+                    source={require("../../assets/Home Screen/timer01.png")}
                     style={styles.fotterImg}
                   />
                 </TouchableOpacity>
-                
-                <TouchableOpacity>
+
+                <TouchableOpacity onPress={handlePressTaskCategory}>
                   <Image
-                    source={require("../../assets/tag02.png")}
+                    source={require("../../assets/Home Screen/tag02.png")}
                     style={styles.fotterImg}
                   />
+                  {TaskCategory && (
+                    <CategoryScreen closeModal={() => setTaskCategory(false)} />
+                  )}
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={handlePressTaskPriority}>
                   <Image
-                    source={require("../../assets/flag03.png")}
+                    source={require("../../assets/Home Screen/flag03.png")}
                     style={[styles.fotterImg]}
                   />
-                {TaskPriority && <TaskPriorityScreen closeModal={() => setTaskPriority(false)} />}
+                  {TaskPriority && (
+                    <TaskPriorityScreen
+                      closeModal={() => setTaskPriority(false)}
+                    />
+                  )}
                 </TouchableOpacity>
-                
 
                 <TouchableOpacity>
                   <Image
-                    source={require("../../assets/send04.png")}
+                    source={require("../../assets/Home Screen/send04.png")}
                     style={[styles.fotterImg, { marginLeft: 160 }]}
                   />
                 </TouchableOpacity>
@@ -112,14 +122,13 @@ export default function ScreenAddTask({ closeModal }) {
 
 const styles = StyleSheet.create({
   containerAddTask: {
-    flex: 1, // Definindo para ocupar metade da tela
+    flex: 1,
     backgroundColor: "black",
   },
   modalBackground: {
-    flex: 1, // Definindo para ocupar metade da tela
+    flex: 1,
     flexDirection: "column",
     backgroundColor: "#363636",
-
     marginTop: 350,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -138,14 +147,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   textStyle: {
-    // color: "#AFAFAF",
+    color: "white",
     fontFamily: "Lato_400Regular",
     fontSize: 18,
     paddingTop: 16,
-    // height: 43,
-    // width: "100%",
   },
-
   InputStyle: {
     height: 43,
     width: "100%",
@@ -153,8 +159,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     borderColor: "white",
-    borderWidth: 1, // largura da borda
-    padding: 10, // preenchimento interno
+    borderWidth: 1,
+    padding: 10,
     borderRadius: 8,
   },
   keyboardAvoidingContainer: {
