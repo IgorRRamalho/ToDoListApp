@@ -1,29 +1,26 @@
 import React from "react";
-import { TextInput, View, Text, StyleSheet, Image } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function Header() {
   return (
     <View style={styles.headerContainer}>
-      
       <View style={styles.viewImg}>
         <Image
-          source={require("../../../assets/menu-button.png")}
+          source={require("../../../assets/Home Screenmenu-button.png")}
           style={styles.headerImg}
         />
       </View>
-      
-      
-      <View  style={{ flex: 1 }}>
+
+      <View style={{ flex: 1 }}>
         <Text style={styles.headerText}>Index</Text>
       </View>
 
       <View style={styles.viewImg}>
         <Image
-          source={require("../../../assets/profile-img.png")}
+          source={require("../../../assets/Home Screen/profile-img.png")}
           style={styles.headerImg}
         />
       </View>
-
     </View>
   );
 }
@@ -33,17 +30,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 10,
-    
   },
   headerText: {
     flex: 1,
     textAlign: "center",
     fontSize: 25,
-    color: "white", 
-    fontFamily: 'Lato_400Regular',
+    color: "white",
+    fontFamily: "Lato_400Regular",
   },
   headerImg: {
-    width: 42, 
+    width: 42,
     height: 42,
   },
   viewImg: {

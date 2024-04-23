@@ -1,77 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Dimensions,
+  Image,
+  KeyboardAvoidingView,
   Modal,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  KeyboardAvoidingView,
-  Platform,
-  Keyboard,
-  FlatList,
-  Image,
 } from "react-native";
-import TaskPriorityScreen from "./TaskPriorityScreen";
 import CategoryScreen from "./CategoryScrenn";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import TaskPriorityScreen from "./TaskPriorityScreen";
 
-const { height } = Dimensions.get("window");
-
-export const loadTasks = async (setTasks) => {
-  try {
-    const storedTasks = await AsyncStorage.getItem("tasks");
-    if (storedTasks !== null) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  } catch (error) {
-    console.error("Error loading tasks:", error);
-  }
-};
-
-export default function ScreenAddTask({ closeModal, tasks, setTasks }) {
+export default function ScreenAddTask({ closeModal }) {
   const [TaskPriority, setTaskPriority] = useState(false);
   const [TaskCategory, setTaskCategory] = useState(false);
-  const [selectedPriorityIndex, setSelectedPriorityIndex] = useState(null);
   const textInputRef = useRef(null);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [priority, setPriority] = useState("");
-
-  useEffect(() => {
-    // Carregar tarefas salvas ao iniciar o componente
-    loadTasks(setTasks);
-  }, []);
-
-  const saveTasks = async () => {
-    try {
-      await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
-    } catch (error) {
-      console.error("Error saving tasks:", error);
-    }
-  };
-
-  const addTask = () => {
-    const newTask = {
-      title,
-      description,
-      category,
-      priority: selectedPriorityIndex,
-    };
-    setTasks([...tasks, newTask]);
-    setTitle("");
-    setDescription("");
-    setCategory("");
-    setPriority("");
-    saveTasks();
-  };
-
-  const handleTaskPriorityClose = (index) => {
-    setSelectedPriorityIndex(index);
-    setTaskPriority(false);
-  };
 
   const handlePressTaskPriority = () => {
     setTaskPriority(true);
@@ -80,26 +26,6 @@ export default function ScreenAddTask({ closeModal, tasks, setTasks }) {
   const handlePressTaskCategory = () => {
     setTaskCategory(true);
   };
-
-  useEffect(() => {
-    // Foca no TextInput assim que o modal for aberto
-    const timer = setTimeout(() => {
-      textInputRef.current.focus();
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const renderItem = ({ item }) => (
-    <View style={styles.taskContainer}>
-      <Text style={styles.taskTitle}>Title: {item.title}</Text>
-      <Text style={styles.taskDescription}>
-        Description: {item.description}
-      </Text>
-      <Text style={styles.taskCategory}>Category: {item.category}</Text>
-      <Text style={styles.taskPriority}>Priority: {item.priority}</Text>
-    </View>
-  );
 
   return (
     <KeyboardAvoidingView
@@ -126,15 +52,15 @@ export default function ScreenAddTask({ closeModal, tasks, setTasks }) {
                   style={styles.InputStyle}
                   placeholder=" Do math homework"
                   placeholderTextColor={"white"}
-                  value={title}
-                  onChangeText={setTitle}
+                  // value={title}
+                  // onChangeText={setTitle}
                 ></TextInput>
 
                 <TextInput
                   style={styles.textStyle}
                   placeholder=" Description"
-                  value={description}
-                  onChangeText={setDescription}
+                  // value={description}
+                  // onChangeText={setDescription}
                   placeholderTextColor={"#AFAFAF"}
                 ></TextInput>
               </View>
@@ -163,11 +89,13 @@ export default function ScreenAddTask({ closeModal, tasks, setTasks }) {
                     style={[styles.fotterImg]}
                   />
                   {TaskPriority && (
-                    <TaskPriorityScreen closeModal={handleTaskPriorityClose} />
+                    <TaskPriorityScreen
+                      closeModal={() => setTaskPriority(false)}
+                    />
                   )}
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={addTask}>
+                <TouchableOpacity>
                   <Image
                     source={require("../../assets/send04.png")}
                     style={[styles.fotterImg, { marginLeft: 160 }]}

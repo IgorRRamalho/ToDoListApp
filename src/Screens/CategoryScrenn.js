@@ -1,27 +1,17 @@
-import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import {
   Dimensions,
+  Image,
   Modal,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
-  KeyboardAvoidingView,
-  Platform,
-  Keyboard,
-  Image,
-  Button,
-
 } from "react-native";
+import CategorySquares from "../components/CategorySquares";
 
-import CategorySquares from "../components/CategoryScreen/CategorySquares";
-
-const { height } = Dimensions.get("window");
 
 export default function CategoryScreen({ closeModal }) {
-
   const [highLight, sethighLight] = useState(false);
 
   const handlePress = () => {
@@ -29,29 +19,25 @@ export default function CategoryScreen({ closeModal }) {
   };
 
   return (
-
     <Modal animationType="slide" transparent={true} onRequestClose={closeModal}>
       <View style={styles.modalBackground}>
         <View style={styles.viewModal}>
           <View style={styles.headerView}>
-          <TouchableOpacity onPress={closeModal}>
-            <Text style={styles.headerText}> Choose Category</Text>
-          </TouchableOpacity>
-            
+            <TouchableOpacity onPress={closeModal}>
+              <Text style={styles.headerText}> Choose Category</Text>
+            </TouchableOpacity>
           </View>
-         
-           <CategorySquares/> 
-            
-            
+
+          <CategorySquares />
+
           <View style={styles.fotterView}>
             <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
-            <Image
+              <Image
                 source={require("../../assets/Add Category Button.png")}
                 style={styles.buttonStyle}
               />
             </TouchableOpacity>
-         
-         </View>
+          </View>
         </View>
       </View>
     </Modal>
@@ -73,7 +59,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     borderRadius: 10,
     padding: 15,
-  
   },
   headerText: {
     textAlign: "center",
@@ -95,19 +80,15 @@ const styles = StyleSheet.create({
   },
   fotterView: {
     height: 48,
-    
-    
   },
   viewButton: {
     flex: 1,
     marginHorizontal: -7,
     marginVertical: -7,
-
   },
   buttonStyle: {
     borderRadius: 4,
-    width: '100%',
-    height: '100%',
-
+    width: "100%",
+    height: "100%",
   },
 });

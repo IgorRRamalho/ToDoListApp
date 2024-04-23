@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Image, Text, Modal, TouchableWithoutFeedback } from "react-native";
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 
 const CategorySquares = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -32,8 +40,10 @@ const CategorySquares = () => {
     "Create New",
   ];
 
+  /* IF DE APERTAR NO CREATE NEW(CRIAR NOVA CATEGORIA) */
   const handlePress = (index) => {
-    if (index === 10) { // If "Create New" is pressed
+    if (index === 10) {
+      // If "Create New" is pressed
       setModalVisible(true);
     } else {
       setSelectedCategory(index);
@@ -46,7 +56,13 @@ const CategorySquares = () => {
         <TouchableOpacity onPress={() => handlePress(index)} key={index}>
           <View style={[styles.quadrado]}>
             <View style={styles.contentView}>
-              <Image source={image} style={[styles.imgSize, index === selectedCategory && styles.selected]} />
+              <Image
+                source={image}
+                style={[
+                  styles.imgSize,
+                  index === selectedCategory && styles.selected,
+                ]}
+              />
               <Text style={styles.text}>{description[index]}</Text>
             </View>
           </View>
@@ -65,7 +81,7 @@ const CategorySquares = () => {
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View style={styles.modalBackground}>
             <View style={styles.modalContent}>
-              {/* Content of your modal here */}
+              {/* MODAL DE NOVA CATEGORIA */}
               <Text>Create New Category</Text>
             </View>
           </View>
@@ -89,17 +105,16 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 4,
-   
   },
   selected: {
-    borderColor: '#8687E7', // Change border color when selected
+    borderColor: "#8687E7", // Change border color when selected
   },
   imgSize: {
     width: 64,
     height: 64,
     borderWidth: 5, // Add border
     borderRadius: 2,
-    borderColor: 'transparent', // Initially transparent
+    borderColor: "transparent", // Initially transparent
   },
   text: {
     fontFamily: "Lato_400Regular",
@@ -116,12 +131,12 @@ const styles = StyleSheet.create({
   },
   modalBackground: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 20,
     borderRadius: 10,
   },

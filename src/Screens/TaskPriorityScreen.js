@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {
+  Image,
   Modal,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Image,
 } from "react-native";
 
 export default function TaskPriorityScreen({ closeModal }) {

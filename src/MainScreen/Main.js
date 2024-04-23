@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
-import { Lato_400Regular } from "@expo-google-fonts/lato";
-import { loadTasks } from "../../Screens/ScreenAddTask";
-import MainTask from "../../Screens/MainTask";
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function Main() {
-  
   return (
     <View style={styles.mainContainer}>
       <Image
-        source={require("../../../assets/centro-menu.png")}
+        source={require("../../../assets/Home Screen/centro-menu.png")}
         style={styles.mainImg}
       />
-       <View style={styles.viewTxt}> 
-        <Text style={[styles.mainText, {paddingTop: 50}]}> What do you want to do today?</Text>
-        <Text style={[styles.mainText, {paddingTop: 15}, {fontSize: 16}]}> Tap + to add your tasks</Text>
+      <View style={styles.viewTxt}>
+        <Text style={[styles.mainText, { paddingTop: 50 }]}>
+          {" "}
+          What do you want to do today?
+        </Text>
+        <Text style={[styles.mainText, { paddingTop: 15 }, { fontSize: 16 }]}>
+          {" "}
+          Tap + to add your tasks
+        </Text>
       </View>
     </View>
   );
@@ -47,6 +49,5 @@ const styles = StyleSheet.create({
   viewTxt: {
     flex: 1,
     marginTop: -40,
-
-  }
+  },
 });
