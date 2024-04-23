@@ -5,8 +5,7 @@ import { loadTasks } from "../../Screens/ScreenAddTask";
 import MainTask from "../../Screens/MainTask";
 
 export default function Main() {
-
-
+  
   return (
     <View style={styles.mainContainer}>
       <Image
