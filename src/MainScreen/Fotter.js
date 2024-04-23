@@ -7,7 +7,7 @@ export default function Fotter() {
     <View style={styles.mainContainer}>
       <View style={styles.viewTab}>
         <Image
-          source={require("../../../assets/Home Screen/index.png")}
+          source={require("../../assets/Home Screen/index.png")}
           style={styles.imgSize}
         />
         <Text style={styles.mainText}>Index</Text>
@@ -15,7 +15,7 @@ export default function Fotter() {
 
       <View style={styles.viewTab}>
         <Image
-          source={require("../../../assets/Home Screen/calendar.png")}
+          source={require("../../assets/Home Screen/calendar.png")}
           style={styles.imgSize}
         />
         <Text style={styles.mainText}>Calendar</Text>
@@ -27,7 +27,7 @@ export default function Fotter() {
 
       <View style={styles.viewTab}>
         <Image
-          source={require("../../../assets/Home Screen/clock.png")}
+          source={require("../../assets/Home Screen/clock.png")}
           style={styles.imgSize}
         />
         <Text style={styles.mainText}>Focuse</Text>
@@ -35,7 +35,7 @@ export default function Fotter() {
 
       <View style={styles.viewTab}>
         <Image
-          source={require("../../../assets/Home Screen/user.png")}
+          source={require("../../assets/Home Screen/user.png")}
           style={styles.imgSize}
         />
         <Text style={styles.mainText}>Profile</Text>

@@ -48,7 +48,7 @@ export default function TaskPriorityScreen({ closeModal }) {
                 <View style={[styles.quadrado, { backgroundColor: color }]}>
                   <View style={styles.contentView}>
                     <Image
-                      source={require("../../assets/flag.png")}
+                      source={require("../../assets/Home Screen/flag.png")}
                       style={styles.imgSize}
                     />
                     <Text style={styles.text}>{index}</Text>
@@ -61,14 +61,14 @@ export default function TaskPriorityScreen({ closeModal }) {
           <View style={styles.fotterView}>
             <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
               <Image
-                source={require("../../assets/Cancel Button.png")}
+                source={require("../../assets/Home Screen/Cancel Button.png")}
                 style={styles.buttonStyle}
               />
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.viewButton} onPress={handleSave}>
               <Image
-                source={require("../../assets/Delete Button.png")}
+                source={require("../../assets/Home Screen/Delete Button.png")}
                 style={styles.buttonStyle}
               />
             </TouchableOpacity>

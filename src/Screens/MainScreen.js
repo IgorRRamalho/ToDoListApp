@@ -1,13 +1,13 @@
+import Header from "../MainScreen/Header";
+import Fotter from "../MainScreen/Fotter";
+import Main from "../MainScreen/Main";
 import { StyleSheet, View } from "react-native";
-import Fotter from "../components/MainScreen/Fotter";
-import Header from "../components/MainScreen/Header";
-import Main from "../components/MainScreen/Main";
 
 export default function MainScreen() {
   return (
     <View style={styles.containerMain}>
       {/* <StatusBar barStyle="default"/> */}
-      <Header />
+      < Header/>
       <Main />
       <Fotter />
     </View>

@@ -33,7 +33,7 @@ export default function CategoryScreen({ closeModal }) {
           <View style={styles.fotterView}>
             <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
               <Image
-                source={require("../../assets/Add Category Button.png")}
+                source={require("../../assets/Home Screen/Add Category Button.png")}
                 style={styles.buttonStyle}
               />
             </TouchableOpacity>

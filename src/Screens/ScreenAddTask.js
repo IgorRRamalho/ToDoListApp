@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Dimensions,
   Image,
@@ -27,6 +27,16 @@ export default function ScreenAddTask({ closeModal }) {
     setTaskCategory(true);
   };
 
+  useEffect(() => {
+    // Foca no TextInput assim que o modal for aberto
+    const timer = setTimeout(() => {
+      textInputRef.current.focus();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
   return (
     <KeyboardAvoidingView
       style={styles.keyboardAvoidingContainer}
@@ -52,7 +62,7 @@ export default function ScreenAddTask({ closeModal }) {
                   style={styles.InputStyle}
                   placeholder=" Do math homework"
                   placeholderTextColor={"white"}
-                  // value={title}
+                  // value={textInputRef}
                   // onChangeText={setTitle}
                 ></TextInput>
 
@@ -68,14 +78,14 @@ export default function ScreenAddTask({ closeModal }) {
               <View style={[styles.viewButtons, { marginLeft: -24 }]}>
                 <TouchableOpacity>
                   <Image
-                    source={require("../../assets/timer01.png")}
+                    source={require("../../assets/Home Screen/timer01.png")}
                     style={styles.fotterImg}
                   />
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={handlePressTaskCategory}>
                   <Image
-                    source={require("../../assets/tag02.png")}
+                    source={require("../../assets/Home Screen/tag02.png")}
                     style={styles.fotterImg}
                   />
                   {TaskCategory && (
@@ -85,7 +95,7 @@ export default function ScreenAddTask({ closeModal }) {
 
                 <TouchableOpacity onPress={handlePressTaskPriority}>
                   <Image
-                    source={require("../../assets/flag03.png")}
+                    source={require("../../assets/Home Screen/flag03.png")}
                     style={[styles.fotterImg]}
                   />
                   {TaskPriority && (
@@ -97,7 +107,7 @@ export default function ScreenAddTask({ closeModal }) {
 
                 <TouchableOpacity>
                   <Image
-                    source={require("../../assets/send04.png")}
+                    source={require("../../assets/Home Screen/send04.png")}
                     style={[styles.fotterImg, { marginLeft: 160 }]}
                   />
                 </TouchableOpacity>

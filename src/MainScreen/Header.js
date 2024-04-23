@@ -6,7 +6,7 @@ export default function Header() {
     <View style={styles.headerContainer}>
       <View style={styles.viewImg}>
         <Image
-          source={require("../../../assets/Home Screenmenu-button.png")}
+          source={require("../../assets/Home Screen/menu-button.png")}
           style={styles.headerImg}
         />
       </View>
@@ -17,7 +17,7 @@ export default function Header() {
 
       <View style={styles.viewImg}>
         <Image
-          source={require("../../../assets/Home Screen/profile-img.png")}
+          source={require("../../assets/Home Screen/profile-img.png")}
           style={styles.headerImg}
         />
       </View>

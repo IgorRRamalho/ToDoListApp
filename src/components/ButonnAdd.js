@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import ScreenAddTask from "../Screens/ScreenAddTask";
 
+const { height } = Dimensions.get("window");
 
 export default function ButonnAdd() {
   const [addTaskVisible, setAddTaskVisible] = useState(false);
@@ -21,17 +22,13 @@ export default function ButonnAdd() {
       <TouchableOpacity onPress={handlePress}>
         <View style={styles.circle}>
           <Image
-            source={require("../../../assets/home-button.png")}
+            source={require("../../assets/Home Screen/button Add Task.png")}
             style={styles.imgSize}
           />
         </View>
       </TouchableOpacity>
       {addTaskVisible && (
-        <ScreenAddTask
-          closeModal={() => setAddTaskVisible(false)}
-          tasks={tasks}
-          setTasks={setTasks}
-        />
+        <ScreenAddTask closeModal={() => setAddTaskVisible(false)} />
       )}
     </>
   );

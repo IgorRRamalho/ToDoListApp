@@ -5,7 +5,7 @@ export default function Main() {
   return (
     <View style={styles.mainContainer}>
       <Image
-        source={require("../../../assets/Home Screen/centro-menu.png")}
+        source={require("../../assets/Home Screen/centro-menu.png")}
         style={styles.mainImg}
       />
       <View style={styles.viewTxt}>

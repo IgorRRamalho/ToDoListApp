@@ -14,17 +14,17 @@ const CategorySquares = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const images = [
-    require("../../../assets/Categories-img/Group267.png"),
-    require("../../../assets/Categories-img/Group268.png"),
-    require("../../../assets/Categories-img/Group269.png"),
-    require("../../../assets/Categories-img/Group270.png"),
-    require("../../../assets/Categories-img/Group271.png"),
-    require("../../../assets/Categories-img/Group272.png"),
-    require("../../../assets/Categories-img/Group273.png"),
-    require("../../../assets/Categories-img/Group274.png"),
-    require("../../../assets/Categories-img/Group275.png"),
-    require("../../../assets/Categories-img/Group276.png"),
-    require("../../../assets/Categories-img/Group277.png"),
+    require("../../assets/Categories-img/Group267.png"),
+    require("../../assets/Categories-img/Group268.png"),
+    require("../../assets/Categories-img/Group269.png"),
+    require("../../assets/Categories-img/Group270.png"),
+    require("../../assets/Categories-img/Group271.png"),
+    require("../../assets/Categories-img/Group272.png"),
+    require("../../assets/Categories-img/Group273.png"),
+    require("../../assets/Categories-img/Group274.png"),
+    require("../../assets/Categories-img/Group275.png"),
+    require("../../assets/Categories-img/Group276.png"),
+    require("../../assets/Categories-img/Group277.png"),
   ];
   const description = [
     "Grocery",

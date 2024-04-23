@@ -7,7 +7,6 @@ import {
 import { Text } from "react-native";
 import MainScreen from "./src/Screens/MainScreen";
 
-const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
