@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,9 +10,15 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import ScreenAddTask from "../../Screens/ScreenAddTask";
 const { width, height } = Dimensions.get("window");
+import { loadTasks } from "../../Screens/ScreenAddTask";
 
 export default function ButonnAdd() {
   const [addTaskVisible, setAddTaskVisible] = useState(false);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    loadTasks(setTasks, tasks);
+  }, []);
 
   const handlePress = () => {
     setAddTaskVisible(true);
@@ -29,7 +35,8 @@ export default function ButonnAdd() {
         </View>
       </TouchableOpacity>
       {addTaskVisible && (
-        <ScreenAddTask closeModal={() => setAddTaskVisible(false)} />
+        <ScreenAddTask closeModal={() => setAddTaskVisible(false)} tasks={tasks} setTasks={setTasks} />
+
       )}
     </>
   );

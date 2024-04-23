@@ -16,11 +16,11 @@ import {
 
 } from "react-native";
 
-import CategorySquares from "../components/CategoryScreen/CategorySquares";
+
 
 const { height } = Dimensions.get("window");
 
-export default function CategoryScreen({ closeModal }) {
+export default function NewCategoryScreen({ closeModal }) {
 
   const [highLight, sethighLight] = useState(false);
 
@@ -34,10 +34,7 @@ export default function CategoryScreen({ closeModal }) {
       <View style={styles.modalBackground}>
         <View style={styles.viewModal}>
           <View style={styles.headerView}>
-          <TouchableOpacity onPress={closeModal}>
             <Text style={styles.headerText}> Choose Category</Text>
-          </TouchableOpacity>
-            
           </View>
          
            <CategorySquares/> 

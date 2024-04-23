@@ -3,29 +3,35 @@ import { StyleSheet, Text, View } from "react-native";
 import Header from "../components/MainScreen/Header";
 import Main from "../components/MainScreen/Main";
 import Fotter from "../components/MainScreen/Fotter";
-import { useState } from "react";
-
-
+import { useEffect, useState } from "react";
+import { loadTasks } from "./ScreenAddTask";
+import MainTask from "./MainTask";
 
 export default function MainScreen() {
+  const [tasks, setTasks] = useState([]);
 
-    return (
+  useEffect(() => {
+    loadTasks(setTasks, tasks);
+  }, []);
+  
+  return (
+    <View style={styles.containerMain}>
+      {/* <StatusBar barStyle="default"/> */}
+      <Header />
       
-      <View style={styles.containerMain}>
-        {/* <StatusBar barStyle="default"/> */}
-        <Header />
-        <Main />
-        <Fotter />
-      </View>
-    );
-  }
+       {tasks.length === 0 ? <Main /> : <MainTask tasks={tasks} />} 
 
-  const styles = StyleSheet.create({
-    containerMain: {
-      flex: 1,
-      justifyContent: "flex-start",
-      alignItems: "center",
-      paddingTop: 70,
-      backgroundColor: "#121212",
-    },
+      <Fotter />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  containerMain: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingTop: 70,
+    backgroundColor: "#121212",
+  },
 });

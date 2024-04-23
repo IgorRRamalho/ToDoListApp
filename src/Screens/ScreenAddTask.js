@@ -10,17 +10,68 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
+  FlatList,
   Image,
 } from "react-native";
 import TaskPriorityScreen from "./TaskPriorityScreen";
 import CategoryScreen from "./CategoryScrenn";
-import Quadrados from "../components/TaskPriorityScreen/Quadrados";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { height } = Dimensions.get("window");
 
-export default function ScreenAddTask({ closeModal }) {
+export const loadTasks = async (setTasks) => {
+  try {
+    const storedTasks = await AsyncStorage.getItem("tasks");
+    if (storedTasks !== null) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  } catch (error) {
+    console.error("Error loading tasks:", error);
+  }
+};
+
+export default function ScreenAddTask({ closeModal, tasks, setTasks }) {
   const [TaskPriority, setTaskPriority] = useState(false);
   const [TaskCategory, setTaskCategory] = useState(false);
+  const [selectedPriorityIndex, setSelectedPriorityIndex] = useState(null);
+  const textInputRef = useRef(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [priority, setPriority] = useState("");
+
+  useEffect(() => {
+    // Carregar tarefas salvas ao iniciar o componente
+    loadTasks(setTasks);
+  }, []);
+
+  const saveTasks = async () => {
+    try {
+      await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
+    } catch (error) {
+      console.error("Error saving tasks:", error);
+    }
+  };
+
+  const addTask = () => {
+    const newTask = {
+      title,
+      description,
+      category,
+      priority: selectedPriorityIndex,
+    };
+    setTasks([...tasks, newTask]);
+    setTitle("");
+    setDescription("");
+    setCategory("");
+    setPriority("");
+    saveTasks();
+  };
+
+  const handleTaskPriorityClose = (index) => {
+    setSelectedPriorityIndex(index);
+    setTaskPriority(false);
+  };
 
   const handlePressTaskPriority = () => {
     setTaskPriority(true);
@@ -30,8 +81,6 @@ export default function ScreenAddTask({ closeModal }) {
     setTaskCategory(true);
   };
 
-  const textInputRef = useRef(null);
-
   useEffect(() => {
     // Foca no TextInput assim que o modal for aberto
     const timer = setTimeout(() => {
@@ -40,6 +89,17 @@ export default function ScreenAddTask({ closeModal }) {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const renderItem = ({ item }) => (
+    <View style={styles.taskContainer}>
+      <Text style={styles.taskTitle}>Title: {item.title}</Text>
+      <Text style={styles.taskDescription}>
+        Description: {item.description}
+      </Text>
+      <Text style={styles.taskCategory}>Category: {item.category}</Text>
+      <Text style={styles.taskPriority}>Priority: {item.priority}</Text>
+    </View>
+  );
 
   return (
     <KeyboardAvoidingView
@@ -66,12 +126,15 @@ export default function ScreenAddTask({ closeModal }) {
                   style={styles.InputStyle}
                   placeholder=" Do math homework"
                   placeholderTextColor={"white"}
-                  onSubmitEditing={closeModal}
+                  value={title}
+                  onChangeText={setTitle}
                 ></TextInput>
 
                 <TextInput
                   style={styles.textStyle}
                   placeholder=" Description"
+                  value={description}
+                  onChangeText={setDescription}
                   placeholderTextColor={"#AFAFAF"}
                 ></TextInput>
               </View>
@@ -100,13 +163,11 @@ export default function ScreenAddTask({ closeModal }) {
                     style={[styles.fotterImg]}
                   />
                   {TaskPriority && (
-                    <TaskPriorityScreen
-                      closeModal={() => setTaskPriority(false)}
-                    />
+                    <TaskPriorityScreen closeModal={handleTaskPriorityClose} />
                   )}
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={addTask}>
                   <Image
                     source={require("../../assets/send04.png")}
                     style={[styles.fotterImg, { marginLeft: 160 }]}
@@ -123,14 +184,13 @@ export default function ScreenAddTask({ closeModal }) {
 
 const styles = StyleSheet.create({
   containerAddTask: {
-    flex: 1, // Definindo para ocupar metade da tela
+    flex: 1,
     backgroundColor: "black",
   },
   modalBackground: {
-    flex: 1, // Definindo para ocupar metade da tela
+    flex: 1,
     flexDirection: "column",
     backgroundColor: "#363636",
-
     marginTop: 350,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -149,14 +209,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   textStyle: {
-    // color: "#AFAFAF",
+    color: "white",
     fontFamily: "Lato_400Regular",
     fontSize: 18,
     paddingTop: 16,
-    // height: 43,
-    // width: "100%",
   },
-
   InputStyle: {
     height: 43,
     width: "100%",
@@ -164,8 +221,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     borderColor: "white",
-    borderWidth: 1, // largura da borda
-    padding: 10, // preenchimento interno
+    borderWidth: 1,
+    padding: 10,
     borderRadius: 8,
   },
   keyboardAvoidingContainer: {
