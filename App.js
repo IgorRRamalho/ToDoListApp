@@ -6,6 +6,7 @@ import {
 import { Text } from "react-native";
 import MainScreen from "./src/Screens/MainScreen";
 
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Lato_400Regular,

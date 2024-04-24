@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Modal,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -52,6 +53,7 @@ export default function ScreenAddTask({ closeModal }) {
 
     return () => clearTimeout(timer);
   }, []);
+
 
   return (
     <KeyboardAvoidingView
@@ -137,7 +139,6 @@ const styles = StyleSheet.create({
     flex: 1, // Adjusted to occupy the whole screen
     flexDirection: "column",
     backgroundColor: "#363636",
-
     marginTop: 350,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -160,10 +161,7 @@ const styles = StyleSheet.create({
     fontFamily: "Lato_400Regular",
     fontSize: 18,
     paddingTop: 16,
-    // height: 43,
-    // width: "100%",
   },
-
   InputStyle: {
     height: 43,
     width: "100%",

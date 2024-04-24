@@ -1,39 +1,33 @@
 import React from "react";
-import { TextInput, View, Text, StyleSheet, Image } from "react-native";
-import ButonnAdd from "./ButonnAdd";
-import { Lato_400Regular } from "@expo-google-fonts/lato";
+import { Image, StyleSheet, Text, View } from "react-native";
+import ButonnAdd from "../components/ButonnAdd";
 
 export default function Fotter() {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.viewTab}>
         <Image
-          source={require("../../../assets/index.png")}
+          source={require("../../assets/Home Screen/index.png")}
           style={styles.imgSize}
         />
         <Text style={styles.mainText}>Index</Text>
       </View>
 
-
       <View style={styles.viewTab}>
         <Image
-          source={require("../../../assets/calendar.png")}
+          source={require("../../assets/Home Screen/calendar.png")}
           style={styles.imgSize}
         />
         <Text style={styles.mainText}>Calendar</Text>
       </View>
 
-
-        <View style={styles.addView}>
-            <ButonnAdd/>
-        </View>
-
-
-
+      <View style={styles.addView}>
+        <ButonnAdd />
+      </View>
 
       <View style={styles.viewTab}>
         <Image
-          source={require("../../../assets/clock.png")}
+          source={require("../../assets/Home Screen/clock.png")}
           style={styles.imgSize}
         />
         <Text style={styles.mainText}>Focuse</Text>
@@ -41,13 +35,11 @@ export default function Fotter() {
 
       <View style={styles.viewTab}>
         <Image
-          source={require("../../../assets/user.png")}
+          source={require("../../assets/Home Screen/user.png")}
           style={styles.imgSize}
         />
         <Text style={styles.mainText}>Profile</Text>
       </View>
-
-
     </View>
   );
 }
@@ -55,8 +47,8 @@ export default function Fotter() {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     width: "100%",
     height: 100,
     backgroundColor: "#363636",
@@ -68,7 +60,7 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     fontSize: 12,
     color: "white",
-    fontFamily: 'Lato_400Regular',
+    fontFamily: "Lato_400Regular",
   },
   imgSize: {
     width: 24,
@@ -89,6 +81,4 @@ const styles = StyleSheet.create({
     height: 64,
     top: 0,
   },
-
 });
-
