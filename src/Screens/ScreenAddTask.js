@@ -13,6 +13,7 @@ import {
 import { addTask } from "../DB/dbManager";
 import TaskPriorityScreen from "./TaskPriorityScreen";
 import CategoryScreen from "./CategoryScrenn";
+import { deleteTask } from "../DB/dbManager";
 
 import { SQLite } from "expo-sqlite"; // Import SQLite from expo-sqlite
 
@@ -24,6 +25,8 @@ export default function ScreenAddTask({ closeModal }) {
   const [priority, setPriority] = useState(0);
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+  const [selectedPriority, setSelectedPriority] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handlePressTaskPriority = () => {
     setTaskPriority(true);
@@ -35,14 +38,23 @@ export default function ScreenAddTask({ closeModal }) {
 
   const handleAddTask = () => {
     if (title.trim() === "") {
-      alert("Por favor, insira um título para a tarefa.");
+      alert("Please enter a title for the task.");
+      return;
+    }
+  
+    if (selectedPriority === null) {
+      alert("Please select a priority for the task.");
       return;
     }
 
-    addTask(title, description, priority, category, date);
+    if (selectedCategory === null) {
+      alert("Please select a category for the task.");
+      return;
+    }
+  
+    addTask(title, description, selectedPriority, selectedCategory, date);
     closeModal();
   };
-
   const textInputRef = useRef(null);
 
   useEffect(() => {
@@ -106,7 +118,12 @@ export default function ScreenAddTask({ closeModal }) {
                   style={styles.fotterImg}
                 />
                 {TaskCategory && (
-                  <CategoryScreen closeModal={() => setTaskCategory(false)} />
+                  <CategoryScreen
+                  closeModal={(category) => {
+                    setSelectedCategory(category);
+                    setTaskCategory(false); // Fechar o modal após a seleção da categoria
+                  }}
+                />
                 )}
               </TouchableOpacity>
 
@@ -115,11 +132,13 @@ export default function ScreenAddTask({ closeModal }) {
                   source={require("../../assets/Home Screen/flag03.png")}
                   style={[styles.fotterImg]}
                 />
-                {TaskPriority && (
-                  <TaskPriorityScreen
-                    closeModal={() => setTaskPriority(false)}
-                  />
-                )}
+                
+                {TaskPriority && (<TaskPriorityScreen
+                  closeModal={(priority) => {
+                    setSelectedPriority(priority);
+                    setTaskPriority(false);
+                  }}
+                />)}
               </TouchableOpacity>
 
               <TouchableOpacity onPress={handleAddTask}>

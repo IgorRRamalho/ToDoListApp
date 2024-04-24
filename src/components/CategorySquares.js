@@ -9,9 +9,9 @@ import {
   View,
 } from "react-native";
 
-const CategorySquares = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+const CategorySquares = ({ onSelectCategory }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null); // Adiciona o estado local para a categoria selecionada
 
   const images = [
     require("../../assets/Categories-img/Group267.png"),
@@ -40,13 +40,12 @@ const CategorySquares = () => {
     "Create New",
   ];
 
-  /* IF DE APERTAR NO CREATE NEW(CRIAR NOVA CATEGORIA) */
   const handlePress = (index) => {
     if (index === 10) {
       // If "Create New" is pressed
       setModalVisible(true);
     } else {
-      setSelectedCategory(index);
+      onSelectCategory(description[index]); // Pass the category name to onSelectCategory
     }
   };
 

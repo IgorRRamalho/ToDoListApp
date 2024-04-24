@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   Image,
@@ -10,14 +10,16 @@ import {
 } from "react-native";
 import CategorySquares from "../components/CategorySquares";
 
-
 export default function CategoryScreen({ closeModal }) {
-  const [highLight, sethighLight] = useState(false);
+  const [highlight, setHighlight] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const handlePress = () => {
-    sethighLight(true);
+  const handlePress = (categoryName) => {
+    setSelectedCategory(categoryName);
+    setHighlight(true);
+    closeModal(categoryName); // Passa o nome da categoria selecionada de volta para o componente pai
   };
-
+  
   return (
     <Modal animationType="slide" transparent={true} onRequestClose={closeModal}>
       <View style={styles.modalBackground}>
@@ -28,9 +30,9 @@ export default function CategoryScreen({ closeModal }) {
             </TouchableOpacity>
           </View>
 
-          <CategorySquares />
+          <CategorySquares onSelectCategory={handlePress} />
 
-          <View style={styles.fotterView}>
+          <View style={styles.footerView}>
             <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
               <Image
                 source={require("../../assets/Home Screen/Add Category Button.png")}
@@ -71,14 +73,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     borderColor: "#979797",
-    // width: 312,
     borderBottomWidth: 1,
   },
   mainView: {
     flex: 1,
     marginTop: 24,
   },
-  fotterView: {
+  footerView: {
     height: 48,
   },
   viewButton: {
@@ -92,3 +93,4 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
+
