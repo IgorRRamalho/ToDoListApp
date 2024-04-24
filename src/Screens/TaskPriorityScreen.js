@@ -62,7 +62,7 @@ export default function TaskPriorityScreen({ closeModal }) {
             ))}
           </View>
 
-          <View style={styles.footerView}>
+          <View style={styles.fotterView}>
             <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
               <Image
                 source={require("../../assets/Home Screen/Cancel Button.png")}
@@ -114,10 +114,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   fotterView: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    textAlign: "center",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

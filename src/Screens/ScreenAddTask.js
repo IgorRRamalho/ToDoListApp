@@ -18,6 +18,7 @@ import { SQLite } from "expo-sqlite"; // Import SQLite from expo-sqlite
 
 export default function ScreenAddTask({ closeModal }) {
   const [TaskPriority, setTaskPriority] = useState(false);
+  const [TaskCategory, setTaskCategory] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(0);
@@ -36,7 +37,6 @@ export default function ScreenAddTask({ closeModal }) {
     if (title.trim() === "") {
       alert("Por favor, insira um título para a tarefa.");
       return;
-
     }
 
     addTask(title, description, priority, category, date);
@@ -100,11 +100,14 @@ export default function ScreenAddTask({ closeModal }) {
                 />
               </TouchableOpacity>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={handlePressTaskCategory}>
                 <Image
                   source={require("../../assets/Home Screen/tag02.png")}
                   style={styles.fotterImg}
                 />
+                {TaskCategory && (
+                  <CategoryScreen closeModal={() => setTaskCategory(false)} />
+                )}
               </TouchableOpacity>
 
               <TouchableOpacity onPress={handlePressTaskPriority}>
