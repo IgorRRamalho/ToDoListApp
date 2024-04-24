@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  Dimensions,
   Modal,
   StyleSheet,
   Text,
@@ -9,26 +8,44 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
-  Keyboard,
   Image,
 } from "react-native";
+import { addTask } from "../DB/dbManager";
 import TaskPriorityScreen from "./TaskPriorityScreen";
-import Quadrados from "../components/TaskPriorityScreen/Quadrados";
 
- const { height } = Dimensions.get("window");
+
+import { SQLite } from "expo-sqlite"; // Import SQLite from expo-sqlite
 
 export default function ScreenAddTask({ closeModal }) {
   const [TaskPriority, setTaskPriority] = useState(false);
-  
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState(0);
+  const [category, setCategory] = useState("");
+  const [date, setDate] = useState("");
 
   const handlePressTaskPriority = () => {
     setTaskPriority(true);
   };
 
+  const handlePressTaskCategory = () => {
+    setTaskCategory(true);
+  };
+
+  const handleAddTask = () => {
+    if (title.trim() === "") {
+      alert("Por favor, insira um título para a tarefa.");
+      return;
+    }
+
+    addTask(title, description, priority, category, date);
+    closeModal();
+  };
+
   const textInputRef = useRef(null);
 
   useEffect(() => {
-    // Foca no TextInput assim que o modal for aberto
+    // Focus on the TextInput as soon as the modal is opened
     const timer = setTimeout(() => {
       textInputRef.current.focus();
     }, 100);
@@ -42,81 +59,82 @@ export default function ScreenAddTask({ closeModal }) {
       behavior={Platform.OS === "ios" ? "padding" : null}
       keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
     >
-      <View style={styles.containerAddTask}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          onRequestClose={closeModal}
-        >
-          <View style={styles.viewModal}>
-            <TouchableOpacity style={styles.modalBackground} activeOpacity={1}>
-              <View style={styles.modalContainer}>
-                <TouchableOpacity onPress={closeModal}>
-                  <Text style={styles.headerText}>Add Task</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.mainContainer}>
-                <TextInput
-                  ref={textInputRef}
-                  style={styles.InputStyle}
-                  placeholder=" Do math homework"
-                  placeholderTextColor={"white"}
-                  onSubmitEditing={closeModal}
-                ></TextInput>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        onRequestClose={closeModal}
+        visible={true} // Ensure modal is visible
+      >
+        <View style={styles.viewModal}>
+          <TouchableOpacity style={styles.modalBackground} activeOpacity={1}>
+            <View style={styles.modalContainer}>
+              <TouchableOpacity onPress={closeModal}>
+                <Text style={styles.headerText}>Add Task</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.mainContainer}>
+              <TextInput
+                ref={textInputRef}
+                style={styles.InputStyle}
+                placeholder=" Do math homework"
+                placeholderTextColor={"white"}
+                value={title}
+                onChangeText={setTitle}
+              ></TextInput>
 
-                <TextInput
-                  style={styles.textStyle}
-                  placeholder=" Description"
-                  placeholderTextColor={"#AFAFAF"}
-                ></TextInput>
-              </View>
+              <TextInput
+                style={styles.textStyle}
+                placeholder=" Description"
+                placeholderTextColor={"#AFAFAF"}
+                value={description}
+                onChangeText={setDescription}
+              ></TextInput>
+            </View>
 
-              <View style={[styles.viewButtons, { marginLeft: -24 }]}>
-                <TouchableOpacity>
-                  <Image
-                    source={require("../../assets/timer01.png")}
-                    style={styles.fotterImg}
-                  />
-                </TouchableOpacity>
-                
-                <TouchableOpacity>
-                  <Image
-                    source={require("../../assets/tag02.png")}
-                    style={styles.fotterImg}
-                  />
-                </TouchableOpacity>
+            <View style={[styles.viewButtons, { marginLeft: -24 }]}>
+              <TouchableOpacity>
+                <Image
+                  source={require("../../assets/timer01.png")}
+                  style={styles.fotterImg}
+                />
+              </TouchableOpacity>
 
-                <TouchableOpacity onPress={handlePressTaskPriority}>
-                  <Image
-                    source={require("../../assets/flag03.png")}
-                    style={[styles.fotterImg]}
-                  />
-                {TaskPriority && <TaskPriorityScreen closeModal={() => setTaskPriority(false)} />}
-                </TouchableOpacity>
-                
+              <TouchableOpacity>
+                <Image
+                  source={require("../../assets/tag02.png")}
+                  style={styles.fotterImg}
+                />
+              </TouchableOpacity>
 
-                <TouchableOpacity>
-                  <Image
-                    source={require("../../assets/send04.png")}
-                    style={[styles.fotterImg, { marginLeft: 160 }]}
+              <TouchableOpacity onPress={handlePressTaskPriority}>
+                <Image
+                  source={require("../../assets/flag03.png")}
+                  style={[styles.fotterImg]}
+                />
+                {TaskPriority && (
+                  <TaskPriorityScreen
+                    closeModal={() => setTaskPriority(false)}
                   />
-                </TouchableOpacity>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      </View>
+                )}
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={handleAddTask}>
+                <Image
+                  source={require("../../assets/send04.png")}
+                  style={[styles.fotterImg, { marginLeft: 160 }]}
+                />
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  containerAddTask: {
-    flex: 1, // Definindo para ocupar metade da tela
-    backgroundColor: "black",
-  },
   modalBackground: {
-    flex: 1, // Definindo para ocupar metade da tela
+    flex: 1, // Adjusted to occupy the whole screen
     flexDirection: "column",
     backgroundColor: "#363636",
 
@@ -138,7 +156,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   textStyle: {
-    // color: "#AFAFAF",
+     color: "white",
     fontFamily: "Lato_400Regular",
     fontSize: 18,
     paddingTop: 16,
@@ -153,8 +171,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     borderColor: "white",
-    borderWidth: 1, // largura da borda
-    padding: 10, // preenchimento interno
+    borderWidth: 1, // width of the border
+    padding: 10, // internal padding
     borderRadius: 8,
   },
   keyboardAvoidingContainer: {
@@ -173,10 +191,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
   viewModal: {
-    margin: 0,
-    padding: 0,
-    height: "100%",
-    width: "100%",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
 });
