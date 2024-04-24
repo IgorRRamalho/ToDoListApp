@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { SQLite, openDatabase } from 'expo-sqlite'; // Updated import
+import { openDatabase } from 'expo-sqlite';
 
-// Open database
-const db = openDatabase('tasksDB'); // Database initialization
+
+const db = openDatabase('tasksDB');
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -19,7 +19,7 @@ const TaskList = () => {
         'SELECT * FROM tasks WHERE title LIKE ?',
         [`%${searchQuery}%`],
         (_, { rows }) => {
-          setTasks(rows._array); // Access rows using rows._array
+          setTasks(rows._array);
         },
         error => {
           console.error('Erro ao buscar as tarefas', error);
@@ -43,8 +43,8 @@ const TaskList = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.taskContainer}>
-      <Text style={styles.taskTitle}>{item.title}</Text>
-      <Text style={styles.taskDescription}>{item.description}</Text>
+      <Text style={styles.taskTitle}>Title: {item.title}</Text>
+      <Text style={styles.taskDescription}>Description: {item.description}</Text>
       <TouchableOpacity onPress={() => handleDeleteTask(item.id)}>
         <Text style={styles.deleteButton}>Excluir</Text>
       </TouchableOpacity>
@@ -53,13 +53,15 @@ const TaskList = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Pesquisar tarefa..."
-        value={searchQuery}
-        onChangeText={text => setSearchQuery(text)}
-        onSubmitEditing={fetchTasks}
-      />
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search by title..."
+          value={searchQuery}
+          onChangeText={text => setSearchQuery(text)}
+          onSubmitEditing={fetchTasks}
+        />
+      </View>
       <FlatList
         data={tasks}
         renderItem={renderItem}
@@ -73,28 +75,48 @@ const TaskList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    paddingTop: 20,
+    backgroundColor: "#121212",
+    paddingHorizontal: 20,
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+    height: 48,
+    padding: 12,
+    backgroundColor: "#1D1D1D",
+    borderRadius: 4,
+    borderWidth: 0.8,
+    borderColor: "#979797",
   },
   searchInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 20,
-    paddingHorizontal: 10,
+    paddingLeft: 5,
+    flex: 1,
+    color: "#FFFFFF",
   },
   taskContainer: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 5,
+    marginBottom: 20,
+    padding: 15,
+    backgroundColor: "#363636",
+    borderRadius: 4,
+    elevation: 2,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   taskTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: "Lato_400Regular",
+    fontSize: 14,
+    lineHeight: 21,
+    fontWeight: 400,
+    marginBottom: 5,
+    color: "#AFAFAF",
   },
   taskDescription: {
     fontSize: 16,
+    marginBottom: 5,
+    color: "#666",
   },
   deleteButton: {
     color: 'red',
@@ -103,6 +125,7 @@ const styles = StyleSheet.create({
   emptyText: {
     textAlign: 'center',
     marginTop: 20,
+    color: "#FFFFFF",
   },
 });
 

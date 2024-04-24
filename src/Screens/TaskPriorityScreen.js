@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import React, { useState } from "react";
 import {
-  Image,
   Image,
   Modal,
   StyleSheet,
@@ -16,26 +14,7 @@ export default function TaskPriorityScreen({ closeModal }) {
   const [colors, setColors] = useState(
     Array.from({ length: 10 }, () => corOriginal)
   );
-  const corOriginal = "#272727";
-  const [selectedSquare, setSelectedSquare] = useState(null);
-  const [colors, setColors] = useState(
-    Array.from({ length: 10 }, () => corOriginal)
-  );
 
-  const handlePressCor = (index) => {
-    const novaCor = [...colors];
-
-    if (selectedSquare !== null) {
-      novaCor[selectedSquare] = corOriginal;
-    }
-
-    novaCor[index] = "#8687E7";
-    setColors(novaCor);
-    setSelectedSquare(index);
-  };
-
-  const handleSave = () => {
-    closeModal(selectedSquare);
   const handlePressCor = (index) => {
     const novaCor = [...colors];
 
@@ -53,11 +32,15 @@ export default function TaskPriorityScreen({ closeModal }) {
   };
 
   return (
-    <Modal animationType="slide" transparent={true} onRequestClose={closeModal}>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      onRequestClose={closeModal}
+    >
       <View style={styles.modalBackground}>
         <View style={styles.viewModal}>
           <View style={styles.headerView}>
-            <Text style={styles.headerText}> Task Priority</Text>
+            <Text style={styles.headerText}>Task Priority</Text>
           </View>
 
           <View style={styles.container}>
@@ -69,7 +52,7 @@ export default function TaskPriorityScreen({ closeModal }) {
                 <View style={[styles.quadrado, { backgroundColor: color }]}>
                   <View style={styles.contentView}>
                     <Image
-                      source={require("../../assets/flag03.png")}
+                      source={require("../../assets/Home Screen/flag03.png")}
                       style={styles.imgSize}
                     />
                     <Text style={styles.text}>{index}</Text>
@@ -79,17 +62,17 @@ export default function TaskPriorityScreen({ closeModal }) {
             ))}
           </View>
 
-          <View style={styles.fotterView}>
+          <View style={styles.footerView}>
             <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
               <Image
-                source={require("../../assets/Cancel Button.png")}
+                source={require("../../assets/Home Screen/Cancel Button.png")}
                 style={styles.buttonStyle}
               />
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.viewButton} onPress={handleSave}>
               <Image
-                source={require("../../assets/Delete Button.png")}
+                source={require("../../assets/Home Screen/Delete Button.png")}
                 style={styles.buttonStyle}
               />
             </TouchableOpacity>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import Header from "../components/MainScreen/Header";
-import Main from "../components/MainScreen/Main";
-import Fotter from "../components/MainScreen/Fotter";
+import Header from "../MainScreen/Header";
+import Main from "../MainScreen/Main";
+import Fotter from "../MainScreen/Fotter";
 import TaskList from "./TaskList";
 import { initDatabase } from "../DB/dbManager";
 import { SQLite, openDatabase } from 'expo-sqlite'; // Import SQLite from expo-sqlite
@@ -43,14 +43,6 @@ export default function MainScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  containerMain: {
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 70,
-    backgroundColor: "#121212",
-  },
 const styles = StyleSheet.create({
   containerMain: {
     flex: 1,

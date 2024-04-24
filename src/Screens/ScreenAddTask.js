@@ -8,12 +8,11 @@ import {
   TouchableOpacity,
   View,
   KeyboardAvoidingView,
-  Platform,
   Image,
 } from "react-native";
 import { addTask } from "../DB/dbManager";
 import TaskPriorityScreen from "./TaskPriorityScreen";
-
+import CategoryScreen from "./CategoryScrenn";
 
 import { SQLite } from "expo-sqlite"; // Import SQLite from expo-sqlite
 
@@ -37,6 +36,7 @@ export default function ScreenAddTask({ closeModal }) {
     if (title.trim() === "") {
       alert("Por favor, insira um título para a tarefa.");
       return;
+
     }
 
     addTask(title, description, priority, category, date);
@@ -53,7 +53,6 @@ export default function ScreenAddTask({ closeModal }) {
 
     return () => clearTimeout(timer);
   }, []);
-
 
   return (
     <KeyboardAvoidingView
@@ -96,21 +95,21 @@ export default function ScreenAddTask({ closeModal }) {
             <View style={[styles.viewButtons, { marginLeft: -24 }]}>
               <TouchableOpacity>
                 <Image
-                  source={require("../../assets/timer01.png")}
+                  source={require("../../assets/Home Screen/timer01.png")}
                   style={styles.fotterImg}
                 />
               </TouchableOpacity>
 
               <TouchableOpacity>
                 <Image
-                  source={require("../../assets/tag02.png")}
+                  source={require("../../assets/Home Screen/tag02.png")}
                   style={styles.fotterImg}
                 />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={handlePressTaskPriority}>
                 <Image
-                  source={require("../../assets/flag03.png")}
+                  source={require("../../assets/Home Screen/flag03.png")}
                   style={[styles.fotterImg]}
                 />
                 {TaskPriority && (
@@ -122,7 +121,7 @@ export default function ScreenAddTask({ closeModal }) {
 
               <TouchableOpacity onPress={handleAddTask}>
                 <Image
-                  source={require("../../assets/send04.png")}
+                  source={require("../../assets/Home Screen/send04.png")}
                   style={[styles.fotterImg, { marginLeft: 160 }]}
                 />
               </TouchableOpacity>
@@ -157,7 +156,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   textStyle: {
-     color: "white",
+    color: "white",
     fontFamily: "Lato_400Regular",
     fontSize: 18,
     paddingTop: 16,
