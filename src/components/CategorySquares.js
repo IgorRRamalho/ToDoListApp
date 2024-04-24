@@ -11,7 +11,7 @@ import {
 
 const CategorySquares = ({ onSelectCategory }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null); // Adiciona o estado local para a categoria selecionada
+  const [selectedCategory, setSelectedCategory] = useState(null); 
 
   const images = [
     require("../../assets/Categories-img/Group267.png"),

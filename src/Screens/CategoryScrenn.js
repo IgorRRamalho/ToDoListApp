@@ -17,15 +17,21 @@ export default function CategoryScreen({ closeModal }) {
   const handlePress = (categoryName) => {
     setSelectedCategory(categoryName);
     setHighlight(true);
-    closeModal(categoryName); // Passa o nome da categoria selecionada de volta para o componente pai
+    // Não feche o modal aqui, apenas passe o nome da categoria de volta para o componente pai
+    // closeModal(categoryName);
   };
-  
+
+  const handleCloseModal = () => {
+    // Feche o modal apenas quando o usuário pressionar o botão de cancelar ou salvar
+    closeModal(selectedCategory);
+  };
+
   return (
-    <Modal animationType="slide" transparent={true} onRequestClose={closeModal}>
+    <Modal animationType="slide" transparent={true}>
       <View style={styles.modalBackground}>
         <View style={styles.viewModal}>
           <View style={styles.headerView}>
-            <TouchableOpacity onPress={closeModal}>
+            <TouchableOpacity onPress={handleCloseModal}>
               <Text style={styles.headerText}> Choose Category</Text>
             </TouchableOpacity>
           </View>
@@ -33,7 +39,8 @@ export default function CategoryScreen({ closeModal }) {
           <CategorySquares onSelectCategory={handlePress} />
 
           <View style={styles.footerView}>
-            <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
+            {/* Chame handleCloseModal ao invés de closeModal */}
+            <TouchableOpacity style={styles.viewButton} onPress={handleCloseModal}>
               <Image
                 source={require("../../assets/Home Screen/Add Category Button.png")}
                 style={styles.buttonStyle}
@@ -93,4 +100,3 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-
