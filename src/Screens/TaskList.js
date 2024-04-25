@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { openDatabase } from "expo-sqlite";
 import { Lato_400Regular } from "@expo-google-fonts/lato";
-import { Ionicons } from '@expo/vector-icons'; // Importe os ícones de acordo com sua preferência
+import { Ionicons } from "@expo/vector-icons"; // Importe os ícones de acordo com sua preferência
 
 const db = openDatabase("tasksDB");
 
@@ -95,21 +95,24 @@ const TaskList = () => {
       </TouchableOpacity>
       <View style={TaskStyles.viewInfo}>
         <Text style={TaskStyles.taskTitle}>{item.title}</Text>
-        <Text style={TaskStyles.taskDescription}>
-          {/* Description: {item.description} */}
-          Today At 16:45 || {item.priority} || 
-          {item.category}
-        </Text>
 
-        <View>
-          <Image source={require("../../assets/Home Screen/flag.png")}/>
-          <Text> {item.priority}</Text>
+        <View style={TaskStyles.content}>
+          <Text style={TaskStyles.taskDescription}>Today At 16:45</Text>
+          <View style={TaskStyles.contentTags}>
+            <Text style={TaskStyles.taskCategory}> {item.category}</Text>
+
+            <TouchableOpacity onPress={() => handleDeleteTask(item.id)}>
+              <View style={TaskStyles.taskPriority}>
+                <Image
+                  style={TaskStyles.flag}
+                  source={require("../../assets/Home Screen/flag.png")}
+                />
+                <Text style={TaskStyles.priorityText}> {item.priority}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-      
-      <TouchableOpacity onPress={() => handleDeleteTask(item.id)}>
-        <Text style={TaskStyles.deleteButton}>Excluir</Text>
-      </TouchableOpacity>
     </View>
   );
 
@@ -196,9 +199,24 @@ const TaskStyles = StyleSheet.create({
     marginBottom: 8,
     color: "white",
   },
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: 320,
+    height: 29,
+
+    
+  },
   taskDescription: {
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingHorizontal: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 29,
     fontSize: 16,
-    marginBottom: 5,
     color: "#AFAFAF",
   },
   taskContainer: {
@@ -219,12 +237,55 @@ const TaskStyles = StyleSheet.create({
     marginVertical: 10,
     width: 20,
     height: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   viewInfo: {
     marginLeft: 10,
     marginRight: 150,
+  },
+  taskPriority: {
+    width: 42,
+    height: 29,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: "#8687E7",
+    
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  priorityText: {
+    color: "#E8E8E8",
+    lineHeight: 21,
+    fontFamily: "Lato_400Regular",
+    fontSize: 12,
+  },
+  flag: {
+    width: 14,
+    height: 14,
+    gap: 0,
+    marginRight: 3,
+  },
+  taskCategory: {
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: "#8687E7",
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingHorizontal: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 29,
+    fontSize: 16,
+    color: "#E8E8E8",
+    marginRight:10
+  },
+  contentTags: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
