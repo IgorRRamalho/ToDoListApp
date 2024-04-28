@@ -34,7 +34,7 @@ const CategorySquares = ({ categories, onSelectCategory }) => {
     setIsAddingNewCategory(true);
   };
 
-  const handlePress = (index) => {
+  const handlePressCategory = (index) => {
     if (index === categories.length - 1) {
       // Se "Create New" for pressionado
       handleAddNewCategory(); // Chame a função para abrir o modal NewCategoryScreen
@@ -47,7 +47,7 @@ const CategorySquares = ({ categories, onSelectCategory }) => {
   return (
     <View style={styles.container}>
       {categories.map((category, index) => (
-        <TouchableOpacity onPress={() => handlePress(index)} key={index}>
+        <TouchableOpacity onPress={() => handlePressCategory(index)} key={index}>
           <View
             style={[
               styles.quadrado,
@@ -71,8 +71,9 @@ const CategorySquares = ({ categories, onSelectCategory }) => {
       {/* Renderize o modal NewCategoryScreen se isAddingNewCategory for verdadeiro */}
        {isAddingNewCategory && (     
           <NewCategory
-            closeModal={() => setIsAddingNewCategory(false)}
+            closeModal={() => setIsAddingNewCategory(false)} addCategory={addNewCategory}
           />
+          
       )} 
     </View>
   );

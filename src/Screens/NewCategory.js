@@ -31,7 +31,7 @@ export default function NewCategory({ closeModal, addCategory }) {
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity> 
 
-        <TouchableOpacity onPress={closeModal}> 
+        <TouchableOpacity onPress={closeModal} style={styles.button}> 
           <Text style={styles.buttonText}> VOLTAR</Text>
         </TouchableOpacity>
       </View>

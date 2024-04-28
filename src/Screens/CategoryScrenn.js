@@ -1,13 +1,21 @@
 // CategoryScreen.js
 import React, { useState } from "react";
-import { Modal, View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
+import {
+  Modal,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+} from "react-native";
 import CategorySquares from "../components/CategorySquares";
 
 import NewCategory from "./NewCategory";
 
-export default function CategoryScreen({ closeModal }) {
+export default function CategoryScreen({ closeModal}) {
   const [highlight, setHighlight] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
   const [categories, setCategories] = useState([
     "Grocery",
     "Work",
@@ -35,38 +43,92 @@ export default function CategoryScreen({ closeModal }) {
     setCategories([...categories, newCategoryName]);
   };
 
+   // Estado para controlar a exibição do modal NewCategoryScreen
+
+  const images = [
+    require("../../assets/Categories-img/Group267.png"),
+    require("../../assets/Categories-img/Group268.png"),
+    require("../../assets/Categories-img/Group269.png"),
+    require("../../assets/Categories-img/Group270.png"),
+    require("../../assets/Categories-img/Group271.png"),
+    require("../../assets/Categories-img/Group272.png"),
+    require("../../assets/Categories-img/Group273.png"),
+    require("../../assets/Categories-img/Group274.png"),
+    require("../../assets/Categories-img/Group275.png"),
+    require("../../assets/Categories-img/Group276.png"),
+    require("../../assets/Categories-img/Group277.png"),
+  ];
+
+  const handleAddNewCategory = () => {
+    setIsAddingNewCategory(true);
+  };
+
+  const handlePressCategory = (categoryName) => {
+    if (categoryName === "Create New") {
+      // Se "Create New" for pressionado
+      handleAddNewCategory(); // Chame a função para abrir o modal NewCategoryScreen
+    } else {
+      setSelectedCategory(categoryName);
+      setHighlight(true);
+    }
+  };
+
   return (
     <Modal animationType="slide" transparent={true}>
-      <View style={styles.modalBackground}>
-        <View style={styles.viewModal}>
-          <View style={styles.headerView}>
-            <TouchableOpacity onPress={handleCloseModal}>
-              <Text style={styles.headerText}>Choose Category</Text>
-            </TouchableOpacity>
-          </View>
+    <View style={styles.modalBackground}>
+      <View style={styles.viewModal}>
+        <View style={styles.headerView}>
+          <TouchableOpacity onPress={handleCloseModal}>
+            <Text style={styles.headerText}>Choose Category</Text>
+          </TouchableOpacity>
+        </View>
 
-          <CategorySquares
-            categories={categories}
-            onSelectCategory={handlePress}
-          />
-
-          <View style={styles.footerView}>
+        <View style={SquareStyle.container}>
+          {categories.map((category, index) => (
             <TouchableOpacity
-              style={styles.viewButton}
-              onPress={handleCloseModal}
+              onPress={() => handlePressCategory(category)}
+              key={index}
             >
-              <Image
-                source={require("../../assets/Home Screen/Add Category Button.png")}
-                style={styles.buttonStyle}
-              />
+              <View
+                style={[
+                  SquareStyle.quadrado,
+                  category === selectedCategory && SquareStyle.selected,
+                ]}
+              >
+                <View style={SquareStyle.contentView}>
+                  <Image
+                    source={images[index]}
+                    style={[
+                      SquareStyle.imgSize,
+                      category === selectedCategory && SquareStyle.selectedImg,
+                    ]}
+                  />
+                  <Text style={SquareStyle.text}>{category}</Text>
+                </View>
+              </View>
             </TouchableOpacity>
-          </View>
+          ))}
+
+          {/* Renderize o modal NewCategoryScreen se isAddingNewCategory for verdadeiro */}
+          {isAddingNewCategory && (
+            <NewCategory closeModal={() => setIsAddingNewCategory(false)} />
+          )}
+        </View>
+
+        <View style={styles.footerView}>
+          <TouchableOpacity
+            style={styles.viewButton}
+            onPress={handleCloseModal}
+          >
+            <Image
+              source={require("../../assets/Home Screen/Add Category Button.png")}
+              style={styles.buttonStyle}
+            />
+          </TouchableOpacity>
         </View>
       </View>
-
-      {/* Passando a função de adicionar nova categoria para o NewCategory */}
-      <NewCategory closeModal={closeModal} addCategory={addNewCategory} />
-    </Modal>
+    </View>
+  </Modal>
   );
 }
 
@@ -111,5 +173,56 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     width: "100%",
     height: "100%",
+  },
+});
+
+const SquareStyle = StyleSheet.create({
+  container: {
+    marginTop: 5,
+    marginBottom: 40,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+  },
+  quadrado: {
+    marginHorizontal: 25,
+    marginVertical: 25,
+    width: 64,
+    height: 64,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "transparent", // Initially transparent
+  },
+  selected: {
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 12.35,
+
+    elevation: 19,
+  },
+  imgSize: {
+    width: 64,
+    height: 64,
+    borderRadius: 2,
+  },
+  selectedImg: {
+    borderWidth: 1, // Add border
+    borderColor: "white", // Add highlight color
+  },
+  text: {
+    fontFamily: "Lato_400Regular",
+    color: "white",
+    fontSize: 14,
+    textAlign: "center",
+    margin: 3,
+    marginVertical: 5,
+    width: 64,
+  },
+  contentView: {
+    flex: 1,
+    justifyContent: "flex-start",
   },
 });
