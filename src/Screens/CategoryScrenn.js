@@ -1,38 +1,14 @@
+// CategoryScreen.js
 import React, { useState } from "react";
-import {
-  Dimensions,
-  Image,
-  Modal,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Modal, View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
 import CategorySquares from "../components/CategorySquares";
 
-
-
+import NewCategory from "./NewCategory";
 
 export default function CategoryScreen({ closeModal }) {
   const [highlight, setHighlight] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-   
-
-  const handlePress = (categoryName) => {
-    setSelectedCategory(categoryName);
-    setHighlight(true);
-    // Não feche o modal aqui, apenas passe o nome da categoria de volta para o componente pai
-    // closeModal(categoryName);
-  };
-
-  const handleCloseModal = () => {
-    // Feche o modal apenas quando o usuário pressionar o botão de cancelar ou salvar
-    closeModal(selectedCategory);
-  };
-
-  
-  const categories = [
+  const [categories, setCategories] = useState([
     "Grocery",
     "Work",
     "Sport",
@@ -43,8 +19,21 @@ export default function CategoryScreen({ closeModal }) {
     "Health",
     "Movie",
     "Home",
-    "Create New"
-  ];
+    "Create New",
+  ]);
+
+  const handlePress = (categoryName) => {
+    setSelectedCategory(categoryName);
+    setHighlight(true);
+  };
+
+  const handleCloseModal = () => {
+    closeModal(selectedCategory);
+  };
+
+  const addNewCategory = (newCategoryName) => {
+    setCategories([...categories, newCategoryName]);
+  };
 
   return (
     <Modal animationType="slide" transparent={true}>
@@ -62,7 +51,6 @@ export default function CategoryScreen({ closeModal }) {
           />
 
           <View style={styles.footerView}>
-            {/* Chame handleCloseModal ao invés de closeModal */}
             <TouchableOpacity
               style={styles.viewButton}
               onPress={handleCloseModal}
@@ -76,8 +64,8 @@ export default function CategoryScreen({ closeModal }) {
         </View>
       </View>
 
- 
-     
+      {/* Passando a função de adicionar nova categoria para o NewCategory */}
+      <NewCategory closeModal={closeModal} addCategory={addNewCategory} />
     </Modal>
   );
 }

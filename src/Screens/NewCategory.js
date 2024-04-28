@@ -1,21 +1,13 @@
+// NewCategory.js
 import React, { useState } from "react";
-import {
-  Dimensions,
-  Image,
-  Modal,
-  StyleSheet,
-  Text,
-  TextInput, // Ensure TextInput is imported
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Modal, View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-export default function NewCategoryScreen({ closeModal }) {
-  const [newCategoryName, setNewCategoryName] = useState(""); // State for new category name
+export default function NewCategory({ closeModal, addCategory }) {
+  const [newCategoryName, setNewCategoryName] = useState("");
 
   const handleSaveCategory = () => {
+    addCategory(newCategoryName); // Passando o nome da nova categoria para a função de callback
     closeModal();
-    // Do something with the newCategoryName
   };
 
   return (
@@ -38,6 +30,10 @@ export default function NewCategoryScreen({ closeModal }) {
         >
           <Text style={styles.buttonText}>Save</Text>
         </TouchableOpacity> 
+
+        <TouchableOpacity onPress={closeModal}> 
+          <Text style={styles.buttonText}> VOLTAR</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );

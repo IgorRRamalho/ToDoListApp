@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 
-import NewCategoryScreen from "../Screens/NewCategoryScreen";
+import NewCategory from "../Screens/NewCategory";
 
 
 const CategorySquares = ({ categories, onSelectCategory }) => {
@@ -70,7 +70,7 @@ const CategorySquares = ({ categories, onSelectCategory }) => {
 
       {/* Renderize o modal NewCategoryScreen se isAddingNewCategory for verdadeiro */}
        {isAddingNewCategory && (     
-          <NewCategoryScreen
+          <NewCategory
             closeModal={() => setIsAddingNewCategory(false)}
           />
       )} 
