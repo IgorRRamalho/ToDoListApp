@@ -1,70 +1,92 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Dimensions,
   Image,
   Modal,
   StyleSheet,
   Text,
-  TextInput, // Ensure TextInput is imported
   TouchableOpacity,
   View,
 } from "react-native";
 
-export default function NewCategoryScreen({ closeModal }) {
-  const [newCategoryName, setNewCategoryName] = useState(""); // State for new category name
+/* TELA AINDA NÃO INICIADA */
 
-  const handleSaveCategory = () => {
-    closeModal();
-    // Do something with the newCategoryName
+export default function NewCategoryScreen({ closeModal }) {
+  const [highLight, sethighLight] = useState(false);
+
+  const handlePress = () => {
+    sethighLight(true);
   };
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={false}
-      onRequestClose={closeModal}
-    >
-      <View style={styles.viewModal}>
-         <TextInput
-          placeholder="Enter category name"
-          onChangeText={setNewCategoryName}
-          style={styles.input}
-          value={newCategoryName} // Controlled component
-        />
+    <Modal animationType="slide" transparent={true} onRequestClose={closeModal}>
+      <View style={styles.modalBackground}>
+        <View style={styles.viewModal}>
+          <View style={styles.headerView}>
+            <Text style={styles.headerText}> Choose Category</Text>
+          </View>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleSaveCategory}
-        >
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity> 
+          <CategorySquares />
+
+          <View style={styles.fotterView}>
+            <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
+              <Image
+                source={require("../../assets/Add Category Button.png")}
+                style={styles.buttonStyle}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  viewModal: {
-    backgroundColor: "#121212",
+  modalBackground: {
+    margin: 0,
+    padding: 0,
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    height: "100%",
+    width: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
-  input: {
-    width: 200,
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 20,
-    paddingHorizontal: 10,
+  viewModal: {
+    backgroundColor: "#363636",
+    marginVertical: 175,
+    marginHorizontal: 24,
+    borderRadius: 10,
+    padding: 15,
   },
-  button: {
-    backgroundColor: "#DDDDDD",
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
+  headerText: {
+    textAlign: "center",
+    fontFamily: "Lato_700Bold",
     fontSize: 16,
+    color: "white",
+    paddingBottom: 16,
+  },
+  headerView: {
+    textAlign: "center",
+    alignItems: "center",
+    borderColor: "#979797",
+    // width: 312,
+    borderBottomWidth: 1,
+  },
+  mainView: {
+    flex: 1,
+    marginTop: 24,
+  },
+  fotterView: {
+    height: 48,
+  },
+  viewButton: {
+    flex: 1,
+    marginHorizontal: -7,
+    marginVertical: -7,
+  },
+  buttonStyle: {
+    borderRadius: 4,
+    width: "100%",
+    height: "100%",
   },
 });
