@@ -11,7 +11,7 @@ import {
 
 const CategorySquares = ({ onSelectCategory }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null); 
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const images = [
     require("../../assets/Categories-img/Group267.png"),
@@ -46,6 +46,7 @@ const CategorySquares = ({ onSelectCategory }) => {
       setModalVisible(true);
     } else {
       onSelectCategory(description[index]); // Pass the category name to onSelectCategory
+      setSelectedCategory(index); // Set the index of selected category
     }
   };
 
@@ -53,13 +54,18 @@ const CategorySquares = ({ onSelectCategory }) => {
     <View style={styles.container}>
       {images.map((image, index) => (
         <TouchableOpacity onPress={() => handlePress(index)} key={index}>
-          <View style={[styles.quadrado]}>
+          <View
+            style={[
+              styles.quadrado,
+              index === selectedCategory && styles.selected,
+            ]}
+          >
             <View style={styles.contentView}>
               <Image
                 source={image}
                 style={[
                   styles.imgSize,
-                  index === selectedCategory && styles.selected,
+                  index === selectedCategory && styles.selectedImg,
                 ]}
               />
               <Text style={styles.text}>{description[index]}</Text>
@@ -71,20 +77,19 @@ const CategorySquares = ({ onSelectCategory }) => {
       {/* Modal */}
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent={false}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(false);
         }}
       >
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={styles.modalBackground}>
-            <View style={styles.modalContent}>
-              {/* MODAL DE NOVA CATEGORIA */}
-              <Text>Create New Category</Text>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
+        <View style={createCategory.viewModal}>
+        <View style={createCategory.viewModal}> 
+          <Text>Create new Category</Text>
+
+        </View>
+          
+        </View>
       </Modal>
     </View>
   );
@@ -104,16 +109,27 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "transparent", // Initially transparent
   },
   selected: {
-    borderColor: "#8687E7", // Change border color when selected
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 12.35,
+
+    elevation: 19,
   },
   imgSize: {
     width: 64,
     height: 64,
-    borderWidth: 5, // Add border
     borderRadius: 2,
-    borderColor: "transparent", // Initially transparent
+  },
+  selectedImg: {
+    borderWidth: 1, // Add border
+    borderColor: "white", // Add highlight color
   },
   text: {
     fontFamily: "Lato_400Regular",
@@ -138,6 +154,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 20,
     borderRadius: 10,
+  },
+});
+
+const createCategory = StyleSheet.create({
+  viewModal: {
+    backgroundColor: "#121212",
+
   },
 });
 

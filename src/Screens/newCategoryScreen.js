@@ -19,25 +19,11 @@ export default function NewCategoryScreen({ closeModal }) {
   };
 
   return (
-    <Modal animationType="slide" transparent={true} onRequestClose={closeModal}>
-      <View style={styles.modalBackground}>
+    <Modal animationType="slide" transparent={false} onRequestClose={closeModal}>
         <View style={styles.viewModal}>
-          <View style={styles.headerView}>
-            <Text style={styles.headerText}> Choose Category</Text>
-          </View>
-
-          <CategorySquares />
-
-          <View style={styles.fotterView}>
-            <TouchableOpacity style={styles.viewButton} onPress={closeModal}>
-              <Image
-                source={require("../../assets/Add Category Button.png")}
-                style={styles.buttonStyle}
-              />
-            </TouchableOpacity>
-          </View>
+          
+    
         </View>
-      </View>
     </Modal>
   );
 }
@@ -52,11 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   viewModal: {
-    backgroundColor: "#363636",
-    marginVertical: 175,
-    marginHorizontal: 24,
-    borderRadius: 10,
-    padding: 15,
+    backgroundColor: "#121212",
   },
   headerText: {
     textAlign: "center",
