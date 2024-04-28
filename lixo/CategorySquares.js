@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 
-import NewCategory from "../Screens/NewCategory";
+import NewCategory from "../src/Screens/NewCategory";
 
 
 const CategorySquares = ({ categories, onSelectCategory }) => {
