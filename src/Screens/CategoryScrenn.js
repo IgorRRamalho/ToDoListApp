@@ -5,14 +5,19 @@ import {
   Modal,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import CategorySquares from "../components/CategorySquares";
 
+
+
+
 export default function CategoryScreen({ closeModal }) {
   const [highlight, setHighlight] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+   
 
   const handlePress = (categoryName) => {
     setSelectedCategory(categoryName);
@@ -26,21 +31,42 @@ export default function CategoryScreen({ closeModal }) {
     closeModal(selectedCategory);
   };
 
+  
+  const categories = [
+    "Grocery",
+    "Work",
+    "Sport",
+    "Design",
+    "University",
+    "Social",
+    "Music",
+    "Health",
+    "Movie",
+    "Home",
+    "Create New"
+  ];
+
   return (
     <Modal animationType="slide" transparent={true}>
       <View style={styles.modalBackground}>
         <View style={styles.viewModal}>
           <View style={styles.headerView}>
             <TouchableOpacity onPress={handleCloseModal}>
-              <Text style={styles.headerText}> Choose Category</Text>
+              <Text style={styles.headerText}>Choose Category</Text>
             </TouchableOpacity>
           </View>
 
-          <CategorySquares onSelectCategory={handlePress} />
+          <CategorySquares
+            categories={categories}
+            onSelectCategory={handlePress}
+          />
 
           <View style={styles.footerView}>
             {/* Chame handleCloseModal ao invés de closeModal */}
-            <TouchableOpacity style={styles.viewButton} onPress={handleCloseModal}>
+            <TouchableOpacity
+              style={styles.viewButton}
+              onPress={handleCloseModal}
+            >
               <Image
                 source={require("../../assets/Home Screen/Add Category Button.png")}
                 style={styles.buttonStyle}
@@ -49,6 +75,9 @@ export default function CategoryScreen({ closeModal }) {
           </View>
         </View>
       </View>
+
+ 
+     
     </Modal>
   );
 }
@@ -82,10 +111,6 @@ const styles = StyleSheet.create({
     borderColor: "#979797",
     borderBottomWidth: 1,
   },
-  mainView: {
-    flex: 1,
-    marginTop: 24,
-  },
   footerView: {
     height: 48,
   },
@@ -99,8 +124,4 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-});
-
-const createCategory = StyleSheet.create({
-  
 });

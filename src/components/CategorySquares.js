@@ -4,14 +4,17 @@ import {
   Modal,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
-const CategorySquares = ({ onSelectCategory }) => {
-  const [modalVisible, setModalVisible] = useState(false);
+import NewCategoryScreen from "../Screens/NewCategoryScreen";
+
+
+const CategorySquares = ({ categories, onSelectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isAddingNewCategory, setIsAddingNewCategory] = useState(false); // Estado para controlar a exibição do modal NewCategoryScreen
 
   const images = [
     require("../../assets/Categories-img/Group267.png"),
@@ -26,33 +29,24 @@ const CategorySquares = ({ onSelectCategory }) => {
     require("../../assets/Categories-img/Group276.png"),
     require("../../assets/Categories-img/Group277.png"),
   ];
-  const description = [
-    "Grocery",
-    "Work",
-    "Sport",
-    "Design",
-    "University",
-    "Social",
-    "Music",
-    "Health",
-    "Movie",
-    "Home",
-    "Create New",
-  ];
+
+  const handleAddNewCategory = () => {
+    setIsAddingNewCategory(true);
+  };
 
   const handlePress = (index) => {
-    if (index === 10) {
-      // If "Create New" is pressed
-      setModalVisible(true);
+    if (index === categories.length - 1) {
+      // Se "Create New" for pressionado
+      handleAddNewCategory(); // Chame a função para abrir o modal NewCategoryScreen
     } else {
-      onSelectCategory(description[index]); // Pass the category name to onSelectCategory
-      setSelectedCategory(index); // Set the index of selected category
+      onSelectCategory(categories[index]);
+      setSelectedCategory(index);
     }
   };
 
   return (
     <View style={styles.container}>
-      {images.map((image, index) => (
+      {categories.map((category, index) => (
         <TouchableOpacity onPress={() => handlePress(index)} key={index}>
           <View
             style={[
@@ -62,35 +56,24 @@ const CategorySquares = ({ onSelectCategory }) => {
           >
             <View style={styles.contentView}>
               <Image
-                source={image}
+                source={images[index]}
                 style={[
                   styles.imgSize,
                   index === selectedCategory && styles.selectedImg,
                 ]}
               />
-              <Text style={styles.text}>{description[index]}</Text>
+              <Text style={styles.text}>{category}</Text>
             </View>
           </View>
         </TouchableOpacity>
       ))}
 
-      {/* Modal */}
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
-        }}
-      >
-        <View style={createCategory.viewModal}>
-        <View style={createCategory.viewModal}> 
-          <Text>Create new Category</Text>
-
-        </View>
-          
-        </View>
-      </Modal>
+      {/* Renderize o modal NewCategoryScreen se isAddingNewCategory for verdadeiro */}
+       {isAddingNewCategory && (     
+          <NewCategoryScreen
+            closeModal={() => setIsAddingNewCategory(false)}
+          />
+      )} 
     </View>
   );
 };
@@ -143,24 +126,6 @@ const styles = StyleSheet.create({
   contentView: {
     flex: 1,
     justifyContent: "flex-start",
-  },
-  modalBackground: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContent: {
-    backgroundColor: "white",
-    padding: 20,
-    borderRadius: 10,
-  },
-});
-
-const createCategory = StyleSheet.create({
-  viewModal: {
-    backgroundColor: "#121212",
-
   },
 });
 
