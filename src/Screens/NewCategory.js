@@ -1,6 +1,13 @@
 // NewCategory.js
 import React, { useState } from "react";
-import { Modal, View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
+import {
+  Modal,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+} from "react-native";
 
 export default function NewCategory({ closeModal, addCategory }) {
   const [newCategoryName, setNewCategoryName] = useState("");
@@ -17,23 +24,37 @@ export default function NewCategory({ closeModal, addCategory }) {
       onRequestClose={closeModal}
     >
       <View style={styles.viewModal}>
-         <TextInput
-          placeholder="Enter category name"
-          onChangeText={setNewCategoryName}
-          style={styles.input}
-          value={newCategoryName} // Controlled component
-        />
+        <View>
+          <Text style={styles.title}>Create new category</Text>
+          <Text style={styles.text}>Category name:</Text>
+          <TextInput
+            placeholder="Category name"
+            onChangeText={setNewCategoryName}
+            style={styles.input}
+            value={newCategoryName} // Controlled component
+          />
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleSaveCategory}
-        >
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity> 
+          <Text style={styles.text}>Category icon:</Text>
+          <TouchableOpacity style={styles.chooseIcon}>
+            <Text>Choose icon from library</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={closeModal}> 
-          <Text style={styles.buttonText}> VOLTAR</Text>
-        </TouchableOpacity>
+          <Text style={styles.text}>Category color:</Text>
+          <View>
+            <Text>colorrrrssss</Text>
+          </View>
+        </View>
+
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity onPress={closeModal} 
+          style={styles.buttonClose}>
+            <Text style={styles.buttonTextCancel}>Cancel</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.buttonCreate} onPress={handleSaveCategory}>
+            <Text style={styles.buttonText}>Create Category</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </Modal>
   );
@@ -43,6 +64,7 @@ const styles = StyleSheet.create({
   viewModal: {
     backgroundColor: "#121212",
     flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -60,7 +82,52 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
-  buttonText: {
+  buttonTextCancel: {
     fontSize: 16,
+    fontWeight:400,
+    lineHeight:24.08,
+    color:"#8687E7"
   },
+  title: {
+    color: "#FFFFFFDE",
+    fontSize: 20,
+    lineHeight: 20,
+    fontWeight: 700,
+  },
+  text: {
+    fontWeight: 400,
+    fontSize: 16,
+    lineHeight: 20,
+    color: "#FFFFFFDE",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+  buttonClose:{
+    width:153,
+    height:48,
+    borderRadius:4,
+    gap:10,
+    paddingHorizontal:24,
+    paddingVertical:12,
+    
+  },
+  buttonCreate:{
+    width:153,
+    height:48,
+    borderRadius:4,
+    gap:10,
+    paddingHorizontal:24,
+    paddingVertical:12,
+    backgroundColor:"#8687E7"
+  },
+  buttonText:{
+    fontSize: 16,
+    fontWeight:400,
+    lineHeight:24.08,
+    color:"#FFFFFF"
+  }
 });
