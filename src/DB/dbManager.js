@@ -4,8 +4,6 @@ import { SQLite, openDatabase } from 'expo-sqlite';
 const db = openDatabase('tasksDB');
 
 
-
-
 export function initDatabase() {
   // Criação da tabela de tarefas
   db.transaction(tx => {
@@ -59,6 +57,21 @@ export const getTasks = callback => {
     );
   });
 };
+
+export const addTask = (title, description, priority, category, date) => {
+  // Insert task
+  db.transaction(tx => {
+    tx.executeSql(
+      'INSERT INTO tasks (title, description, priority, category, date) VALUES (?, ?, ?, ?, ?)',
+      [title, description, priority, category, date],
+      () => { },
+      error => {
+        console.error('Erro ao adicionar a tarefa', error);
+      }
+    );
+  });
+};
+
 
 export const deleteTask = id => {
   // Delete task by id
