@@ -14,7 +14,7 @@ export default function App() {
     tx.executeSql(
       "CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE)"
     );
-    tx.executeSql("DELETE FROM categories"); // Se necessário, remova o comentário para limpar a tabela antes de inserir novas categorias
+    tx.executeSql("DELETE FROM categories"); 
     tx.executeSql("BEGIN TRANSACTION;");
     tx.executeSql("INSERT OR IGNORE INTO categories (name) VALUES (?)", ["Grocery"]);
     tx.executeSql("INSERT OR IGNORE INTO categories (name) VALUES (?)", ["Work"]);

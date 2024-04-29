@@ -1,4 +1,3 @@
-// CategoryScreen.js
 import { openDatabase } from "expo-sqlite";
 import React, { useEffect, useState } from "react";
 import {
@@ -17,15 +16,13 @@ export default function CategoryScreen({ closeModal }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [categoriesLoaded, setCategoriesLoaded] = useState(false); // Add state to track if categories are loaded
-
+  const [categoriesLoaded, setCategoriesLoaded] = useState(false); 
   useEffect(() => {
     if (!categoriesLoaded) {
-      // Check if categories are already loaded
+    
       fetchCategories();
     }
-  }, [categoriesLoaded]); // Run useEffect only when categoriesLoaded changes
-
+  }, [categoriesLoaded]);
   const fetchCategories = () => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -33,7 +30,7 @@ export default function CategoryScreen({ closeModal }) {
         [],
         (_, { rows: { _array } }) => {
           setCategories(_array.map((item) => item.name));
-          setCategoriesLoaded(true); // Set categoriesLoaded to true after categories are fetched
+          setCategoriesLoaded(true); 
         }
       );
     });
@@ -46,7 +43,7 @@ export default function CategoryScreen({ closeModal }) {
         [categoryName],
         () => {
           console.log("Category added successfully");
-          fetchCategories(); // Atualiza a lista de categorias após a adição
+          fetchCategories(); 
         }
       );
     });
@@ -87,8 +84,8 @@ export default function CategoryScreen({ closeModal }) {
   
   const handlePressCategory = (categoryName) => {
     if (categoryName === "Create New") {
-      // Se "Create New" for pressionado
-      handleAddNewCategory(); // Chame a função para abrir o modal NewCategoryScreen
+      
+      handleAddNewCategory(); 
     } else {
       setSelectedCategory(categoryName);
       setHighlight(true);
@@ -135,7 +132,7 @@ export default function CategoryScreen({ closeModal }) {
             {isAddingNewCategory && (
               <NewCategory
                 closeModal={() => setIsAddingNewCategory(false)}
-                addNewCategory={addNewCategory} // Passando a função para adicionar nova categoria
+                addNewCategory={addNewCategory} 
               />
             )}
           </View>
@@ -216,7 +213,7 @@ const SquareStyle = StyleSheet.create({
     height: 64,
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: "transparent", // Initially transparent
+    borderColor: "transparent",
   },
   selected: {
     shadowOffset: {
@@ -234,8 +231,8 @@ const SquareStyle = StyleSheet.create({
     borderRadius: 2,
   },
   selectedImg: {
-    borderWidth: 1, // Add border
-    borderColor: "white", // Add highlight color
+    borderWidth: 1, 
+    borderColor: "white", 
   },
   text: {
     fontFamily: "Lato_400Regular",

@@ -3,22 +3,22 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function Header() {
   return (
-    <View style={styles.headerContainer}>
-      <View style={styles.viewImg}>
+    <View style={stylesHeader.headerContainer}>
+      <View style={stylesHeader.viewImg}>
         <Image
           source={require("../../assets/Home Screen/menu-button.png")}
-          style={styles.headerImg}
+          style={stylesHeader.headerImg}
         />
       </View>
 
       <View style={{ flex: 1 }}>
-        <Text style={styles.headerText}>Index</Text>
+        <Text style={stylesHeader.headerText}>Index</Text>
       </View>
 
-      <View style={styles.viewImg}>
+      <View style={stylesHeader.viewImg}>
         <Image
           source={require("../../assets/Home Screen/profile-img.png")}
-          style={styles.headerImg}
+          style={stylesHeader.headerImg}
         />
       </View>
     </View>

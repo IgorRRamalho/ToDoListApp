@@ -53,6 +53,7 @@ export default function ScreenAddTask({ closeModal }) {
     }
   
     addTask(title, description, selectedPriority, selectedCategory, date);
+    console.log('Task Adicionada !')
     closeModal();
   };
   const textInputRef = useRef(null);

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
 
-    borderRadius: 100, // metade da largura/altura para fazer um círculo
+    borderRadius: 100, 
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.4,
     shadowRadius: 7,
-    elevation: 10, // para sombra funcionar no Android
+    elevation: 10,
   },
   imgSize: {
     width: 100,
