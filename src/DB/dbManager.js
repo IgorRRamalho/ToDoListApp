@@ -20,7 +20,7 @@ export function initDatabase() {
   });
 
   // Inserção das categorias
-  db.transaction((tx) => {
+  db.transaction(tx => {
     tx.executeSql(
       "CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE)"
     );

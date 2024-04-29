@@ -5,10 +5,12 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Image,
   View,
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
+import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
 
 export default function NewCategory({ closeModal, addNewCategory }) {
   const [newCategoryName, setNewCategoryName] = useState("");
@@ -46,20 +48,27 @@ export default function NewCategory({ closeModal, addNewCategory }) {
       transparent={false}
       onRequestClose={closeModal}
     >
-      <View style={styles.viewModal}>
-        <View style={styles.topContainer}>
-          <Text style={styles.title}>Create new category</Text>
-          <Text style={styles.text}>Category name:</Text>
-          <TextInput
-            placeholder="Enter category name"
-            onChangeText={setNewCategoryName}
-            style={styles.input}
-            value={newCategoryName} // Controlled component
-          />
-
+      <View style={stylesView.base}>
+        <View style={stylesView.viewModal}>
+          <View style={stylesView.topContainer}>
+            <Text style={styles.title}>Create new category</Text>
+          </View>
+          <View style={stylesView.viewMain}>
+            <Text style={styles.text}>Category name:</Text>
+            <TextInput
+              placeholder="Category name"
+              placeholderTextColor={"#979797"}
+              onChangeText={setNewCategoryName}
+              style={styles.input}
+              value={newCategoryName} // Controlled component
+            />
+          </View>
           <Text style={styles.text}>Category icon:</Text>
-          <TouchableOpacity style={styles.chooseIcon}>
-            <Text style={styles.chooseText}>Choose icon from library</Text>
+          <TouchableOpacity>
+            <Image
+              source={require("../../assets/Frame 159.png")}
+              style={styles.chooseIcon}
+            />
           </TouchableOpacity>
 
           <Text style={styles.text}>Category color:</Text>
@@ -73,44 +82,76 @@ export default function NewCategory({ closeModal, addNewCategory }) {
             {renderColorItem("#9741CC")}
             {renderColorItem("#CC4173")}
           </View>
-        </View>
 
-        <View style={styles.bottonContainer}>
-          <TouchableOpacity onPress={closeModal} style={styles.buttonCancel}>
-            <Text style={styles.buttonTextCancel}>Cancel</Text>
-          </TouchableOpacity>
+          <View style={stylesView.viewFotter}>
+            <TouchableOpacity onPress={closeModal}>
+              <Image
+                source={require("../../assets/CancelCategoryButton.png")}
+                style={styles.buttonCancel}
+              />
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.buttonCreate}
-            onPress={handleSaveCategory}
-          >
-            <Text style={styles.buttonTextCreate}>Create Category</Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={handleSaveCategory}>
+              <Image
+                source={require("../../assets/CreateCategoryButton.png")}
+                style={styles.buttonCreate}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
   );
 }
 
-const styles = StyleSheet.create({
+const stylesView = StyleSheet.create({
+  base: {
+    backgroundColor: "#121212",
+    flex: 1,
+  },
   viewModal: {
     backgroundColor: "#121212",
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    marginHorizontal: 24,
+    marginVertical: 80,
+  },
+  topContainer: {
+    marginVertical: 20,
+  },
+  viewMain: {},
+  viewFotter: {
+    flex: 1,
+    alignItems: "flex-end",
+    flexDirection: "row",
+  },
+});
+
+const styles = StyleSheet.create({
+  title: {
+    color: "#FFFFFFDE",
+    fontFamily: "Lato_700Bold",
+    fontSize: 20,
+    lineHeight: 20,
+  },
+  text: {
+    fontFamily: "Lato_400Regular",
+    fontSize: 16,
+    lineHeight: 20,
+    color: "#FFFFFFDE",
+    paddingVertical: 12,
   },
   input: {
-    width: 327,
+    width: "100%",
     height: 48,
     borderColor: "#979797",
     borderWidth: 0.8,
     borderRadius: 4,
     marginBottom: 20,
-    padding:12,
-    backgroundColor:"#1D1D1D",
-    color:"#AFAFAF",
-    fontSize:16,
-    lineHeight:24.08
+    padding: 12,
+    backgroundColor: "#1D1D1D",
+    color: "#AFAFAF",
+    fontSize: 16,
+    lineHeight: 24.08,
   },
   buttonTextCancel: {
     fontSize: 16,
@@ -119,39 +160,18 @@ const styles = StyleSheet.create({
     color: "#8687E7",
   },
   buttonCancel: {
-    width: 153,
+    width: 160,
     height: 48,
     borderRadius: 4,
-    gap: 10,
-    paddingHorizontal: 24,
-    paddingVertical: 12,
+    marginHorizontal: 18,
+   
   },
   buttonCreate: {
-    width: 153,
+    width: 160,
     height: 48,
     borderRadius: 4,
-    gap: 10,
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    backgroundColor: "#8687E7",
   },
-  buttonTextCreate: {
-    fontSize: 16,
-    fontWeight: 400,
-    lineHeight: 24.08,
-    color: "#FFFFFF",
-  },
-  title: {
-    color: "#FFFFFFDE",
-    fontSize: 20,
-    lineHeight: 20,
-    fontWeight: 700,
-  },
-  topContainer: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
+
   colorScrollView: {
     flexDirection: "row",
     marginTop: 10,
@@ -166,27 +186,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 10,
   },
-  bottonContainer: {
-    flexDirection: "row",
-    marginTop:70,
+  chooseIcon: {
+    width: 154,
+    height: 37,
   },
-  text: {
+  chooseText: {
+    color: "#FFFFFF36",
     fontWeight: 400,
-    fontSize: 16,
-    lineHeight: 20,
-    color: "#FFFFFFDE",
+    fontSize: 12,
+    lineHeight: 21,
   },
-  chooseIcon:{
-    width:154,
-    height:37,
-    borderRadius:6,
-    paddingHorizontal: 16,
-    paddingVertical:8
-  },
-  chooseText:{
-    color:"#FFFFFF36",
-    fontWeight:400,
-    fontSize:12,
-    lineHeight:21
-  }
 });

@@ -10,7 +10,7 @@ import { openDatabase } from "expo-sqlite";
 const db = openDatabase("categories.db");
 export default function App() {
 
-  /* db.transaction((tx) => {
+   db.transaction((tx) => {
     tx.executeSql(
       "CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE)"
     );
@@ -28,7 +28,7 @@ export default function App() {
     tx.executeSql("INSERT OR IGNORE INTO categories (name) VALUES (?)", ["Home"]);
     tx.executeSql("INSERT OR IGNORE INTO categories (name) VALUES (?)", ["Create New"]);
     tx.executeSql("COMMIT;");
-  }); */
+  }); 
 
   const [fontsLoaded] = useFonts({
     Lato_400Regular,
