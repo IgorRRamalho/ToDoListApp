@@ -83,6 +83,8 @@ export default function CategoryScreen({ closeModal }) {
     require("../../assets/Categories-img/Group277.png"),
   ];
 
+
+  
   const handlePressCategory = (categoryName) => {
     if (categoryName === "Create New") {
       // Se "Create New" for pressionado

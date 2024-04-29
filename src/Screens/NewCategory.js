@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   StyleSheet,
@@ -7,14 +7,43 @@ import {
   TouchableOpacity,
   Image,
   View,
+  Platform,
+  
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
+import * as ImagePicker from 'expo-image-picker';
 
 export default function NewCategory({ closeModal, addNewCategory }) {
   const [newCategoryName, setNewCategoryName] = useState("");
   const [selectedColor, setSelectedColor] = useState(null); // Adicionando o estado para a cor selecionada
+  const [imageSource, setImageSource] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Permission to access media library is required!');
+        }
+      }
+    })();
+  }, []);
+
+  const escolherImagem = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImageSource({ uri: result.uri });
+    }
+  };
+
 
   const handleSaveCategory = () => {
     addNewCategory(newCategoryName, selectedColor); // Chame a função para adicionar nova categoria e a cor selecionada
@@ -64,12 +93,14 @@ export default function NewCategory({ closeModal, addNewCategory }) {
             />
           </View>
           <Text style={styles.text}>Category icon:</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={escolherImagem}>
             <Image
               source={require("../../assets/Frame 159.png")}
               style={styles.chooseIcon}
             />
           </TouchableOpacity>
+
+          {imageSource && <Image source={imageSource} />}
 
           <Text style={styles.text}>Category color:</Text>
           <View style={styles.colorScrollView}>
