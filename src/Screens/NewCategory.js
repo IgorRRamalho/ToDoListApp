@@ -1,4 +1,3 @@
-// NewCategory.js
 import React, { useState } from "react";
 import {
   Modal,
@@ -41,17 +40,33 @@ export default function NewCategory({ closeModal, addCategory }) {
 
           <Text style={styles.text}>Category color:</Text>
           <View>
-            <Text>colorrrrssss</Text>
+            <Text style={styles.text}>Category color:</Text>
+            <ScrollView horizontal={true} style={styles.colorScrollView}>
+              <View style={styles.colorItem}>
+                <Text style={styles.colorText}>Color 1</Text>
+              </View>
+              <View style={styles.colorItem}>
+                <Text style={styles.colorText}>Color 2</Text>
+              </View>
+              <View style={styles.colorItem}>
+                <Text style={styles.colorText}>Color 3</Text>
+              </View>
+              <View style={styles.colorItem}>
+                <Text style={styles.colorText}>Color 4</Text>
+              </View>
+            </ScrollView>
           </View>
         </View>
 
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity onPress={closeModal} 
-          style={styles.buttonClose}>
+          <TouchableOpacity onPress={closeModal} style={styles.buttonClose}>
             <Text style={styles.buttonTextCancel}>Cancel</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonCreate} onPress={handleSaveCategory}>
+          <TouchableOpacity
+            style={styles.buttonCreate}
+            onPress={handleSaveCategory}
+          >
             <Text style={styles.buttonText}>Create Category</Text>
           </TouchableOpacity>
         </View>
@@ -84,9 +99,9 @@ const styles = StyleSheet.create({
   },
   buttonTextCancel: {
     fontSize: 16,
-    fontWeight:400,
-    lineHeight:24.08,
-    color:"#8687E7"
+    fontWeight: 400,
+    lineHeight: 24.08,
+    color: "#8687E7",
   },
   title: {
     color: "#FFFFFFDE",
@@ -106,28 +121,47 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
   },
-  buttonClose:{
-    width:153,
-    height:48,
-    borderRadius:4,
-    gap:10,
-    paddingHorizontal:24,
-    paddingVertical:12,
-    
+  buttonClose: {
+    width: 153,
+    height: 48,
+    borderRadius: 4,
+    gap: 10,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
   },
-  buttonCreate:{
-    width:153,
-    height:48,
-    borderRadius:4,
-    gap:10,
-    paddingHorizontal:24,
-    paddingVertical:12,
-    backgroundColor:"#8687E7"
+  buttonCreate: {
+    width: 153,
+    height: 48,
+    borderRadius: 4,
+    gap: 10,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    backgroundColor: "#8687E7",
   },
-  buttonText:{
+  buttonText: {
     fontSize: 16,
-    fontWeight:400,
-    lineHeight:24.08,
-    color:"#FFFFFF"
-  }
+    fontWeight: 400,
+    lineHeight: 24.08,
+    color: "#FFFFFF",
+  },
+
+  colorScrollView: {
+    flexDirection: "row",
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  colorItem: {
+    width: 80,
+    height: 80,
+    backgroundColor: "gray",
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  colorText: {
+    color: "white",
+    fontSize: 16,
+  },
+  
 });
