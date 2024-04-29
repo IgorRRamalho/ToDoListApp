@@ -7,7 +7,7 @@ import TaskList from "./TaskList";
 import { initDatabase } from "../DB/dbManager";
 import { SQLite, openDatabase } from 'expo-sqlite'; // Import SQLite from expo-sqlite
 
-initDatabase(); 
+initDatabase();   
 
 const db = openDatabase('tasksDB'); // Open the database
 
