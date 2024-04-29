@@ -1,12 +1,12 @@
 // NewCategory.js
 import React, { useState } from "react";
-import { Modal, View, TextInput, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-export default function NewCategory({ closeModal, addCategory }) {
+export default function NewCategory({ closeModal, addNewCategory  }) {
   const [newCategoryName, setNewCategoryName] = useState("");
 
   const handleSaveCategory = () => {
-    addCategory(newCategoryName); // Passando o nome da nova categoria para a função de callback
+    addNewCategory(newCategoryName); // Chame a função para adicionar nova categoria
     closeModal();
   };
 

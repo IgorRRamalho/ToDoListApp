@@ -1,14 +1,13 @@
 // CategoryScreen.js
 import React, { useState } from "react";
 import {
-  Modal,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
   Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import CategorySquares from "../../lixo/CategorySquares";
 
 import NewCategory from "./NewCategory";
 
@@ -39,6 +38,10 @@ export default function CategoryScreen({ closeModal }) {
     closeModal(selectedCategory);
   };
 
+  const handleAddNewCategory = () => {
+    setIsAddingNewCategory(true);
+  };
+
   const addNewCategory = (newCategoryName) => {
     setCategories([...categories, newCategoryName]);
   };
@@ -58,10 +61,6 @@ export default function CategoryScreen({ closeModal }) {
     require("../../assets/Categories-img/Group276.png"),
     require("../../assets/Categories-img/Group277.png"),
   ];
-
-  const handleAddNewCategory = () => {
-    setIsAddingNewCategory(true);
-  };
 
   const handlePressCategory = (categoryName) => {
     if (categoryName === "Create New") {
@@ -110,9 +109,11 @@ export default function CategoryScreen({ closeModal }) {
               </TouchableOpacity>
             ))}
 
-            {/* Renderize o modal NewCategoryScreen se isAddingNewCategory for verdadeiro */}
             {isAddingNewCategory && (
-              <NewCategory closeModal={() => setIsAddingNewCategory(false)} />
+              <NewCategory
+                closeModal={() => setIsAddingNewCategory(false)}
+                addNewCategory={addNewCategory} // Passando a função para adicionar nova categoria
+              />
             )}
           </View>
 
