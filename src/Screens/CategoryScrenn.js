@@ -1,5 +1,6 @@
 // CategoryScreen.js
-import React, { useState } from "react";
+import { openDatabase } from "expo-sqlite";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   Modal,
@@ -8,26 +9,48 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 import NewCategory from "./NewCategory";
+const db = openDatabase("categories.db");
 
 export default function CategoryScreen({ closeModal }) {
   const [highlight, setHighlight] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
-  const [categories, setCategories] = useState([
-    "Grocery",
-    "Work",
-    "Sport",
-    "Design",
-    "University",
-    "Social",
-    "Music",
-    "Health",
-    "Movie",
-    "Home",
-    "Create New",
-  ]);
+  const [categories, setCategories] = useState([]);
+  const [categoriesLoaded, setCategoriesLoaded] = useState(false); // Add state to track if categories are loaded
+
+  useEffect(() => {
+    if (!categoriesLoaded) {
+      // Check if categories are already loaded
+      fetchCategories();
+    }
+  }, [categoriesLoaded]); // Run useEffect only when categoriesLoaded changes
+
+  const fetchCategories = () => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM categories",
+        [],
+        (_, { rows: { _array } }) => {
+          setCategories(_array.map((item) => item.name));
+          setCategoriesLoaded(true); // Set categoriesLoaded to true after categories are fetched
+        }
+      );
+    });
+  };
+
+  const addCategoryToDB = (categoryName) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "INSERT INTO categories (name) VALUES (?)",
+        [categoryName],
+        () => {
+          console.log("Category added successfully");
+          fetchCategories(); // Atualiza a lista de categorias após a adição
+        }
+      );
+    });
+  };
 
   const handlePress = (categoryName) => {
     setSelectedCategory(categoryName);
@@ -43,10 +66,8 @@ export default function CategoryScreen({ closeModal }) {
   };
 
   const addNewCategory = (newCategoryName) => {
-    setCategories([...categories, newCategoryName]);
+    addCategoryToDB(newCategoryName);
   };
-
-  // Estado para controlar a exibição do modal NewCategoryScreen
 
   const images = [
     require("../../assets/Categories-img/Group267.png"),
