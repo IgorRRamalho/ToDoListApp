@@ -16,10 +16,9 @@ export default function CategoryScreen({ closeModal }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [categoriesLoaded, setCategoriesLoaded] = useState(false); 
+  const [categoriesLoaded, setCategoriesLoaded] = useState(false);
   useEffect(() => {
     if (!categoriesLoaded) {
-    
       fetchCategories();
     }
   }, [categoriesLoaded]);
@@ -30,7 +29,7 @@ export default function CategoryScreen({ closeModal }) {
         [],
         (_, { rows: { _array } }) => {
           setCategories(_array.map((item) => item.name));
-          setCategoriesLoaded(true); 
+          setCategoriesLoaded(true);
         }
       );
     });
@@ -43,15 +42,10 @@ export default function CategoryScreen({ closeModal }) {
         [categoryName],
         () => {
           console.log("Category added successfully");
-          fetchCategories(); 
+          fetchCategories();
         }
       );
     });
-  };
-
-  const handlePress = (categoryName) => {
-    setSelectedCategory(categoryName);
-    setHighlight(true);
   };
 
   const handleCloseModal = () => {
@@ -80,12 +74,9 @@ export default function CategoryScreen({ closeModal }) {
     require("../../assets/Categories-img/Group277.png"),
   ];
 
-
-  
   const handlePressCategory = (categoryName) => {
     if (categoryName === "Create New") {
-      
-      handleAddNewCategory(); 
+      handleAddNewCategory();
     } else {
       setSelectedCategory(categoryName);
       setHighlight(true);
@@ -132,7 +123,7 @@ export default function CategoryScreen({ closeModal }) {
             {isAddingNewCategory && (
               <NewCategory
                 closeModal={() => setIsAddingNewCategory(false)}
-                addNewCategory={addNewCategory} 
+                addNewCategory={addNewCategory}
               />
             )}
           </View>
@@ -231,8 +222,8 @@ const SquareStyle = StyleSheet.create({
     borderRadius: 2,
   },
   selectedImg: {
-    borderWidth: 1, 
-    borderColor: "white", 
+    borderWidth: 1,
+    borderColor: "white",
   },
   text: {
     fontFamily: "Lato_400Regular",

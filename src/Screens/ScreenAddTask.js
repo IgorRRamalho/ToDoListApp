@@ -13,17 +13,12 @@ import {
 import { addTask } from "../DB/dbManager";
 import TaskPriorityScreen from "./TaskPriorityScreen";
 import CategoryScreen from "./CategoryScrenn";
-import { deleteTask } from "../DB/dbManager";
-
-import { SQLite } from "expo-sqlite"; // Import SQLite from expo-sqlite
 
 export default function ScreenAddTask({ closeModal }) {
   const [TaskPriority, setTaskPriority] = useState(false);
   const [TaskCategory, setTaskCategory] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState(0);
-  const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [selectedPriority, setSelectedPriority] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -41,7 +36,7 @@ export default function ScreenAddTask({ closeModal }) {
       alert("Please enter a title for the task.");
       return;
     }
-  
+
     if (selectedPriority === null) {
       alert("Please select a priority for the task.");
       return;
@@ -51,15 +46,14 @@ export default function ScreenAddTask({ closeModal }) {
       alert("Please select a category for the task.");
       return;
     }
-  
+
     addTask(title, description, selectedPriority, selectedCategory, date);
-    console.log('Task Adicionada !')
+    console.log("Task Adicionada !");
     closeModal();
   };
   const textInputRef = useRef(null);
 
   useEffect(() => {
-    // Focus on the TextInput as soon as the modal is opened
     const timer = setTimeout(() => {
       textInputRef.current.focus();
     }, 100);
@@ -77,7 +71,7 @@ export default function ScreenAddTask({ closeModal }) {
         animationType="slide"
         transparent={true}
         onRequestClose={closeModal}
-        visible={true} // Ensure modal is visible
+        visible={true}
       >
         <View style={styles.viewModal}>
           <TouchableOpacity style={styles.modalBackground} activeOpacity={1}>
@@ -120,11 +114,11 @@ export default function ScreenAddTask({ closeModal }) {
                 />
                 {TaskCategory && (
                   <CategoryScreen
-                  closeModal={(category) => {
-                    setSelectedCategory(category);
-                    setTaskCategory(false); // Fechar o modal após a seleção da categoria
-                  }}
-                />
+                    closeModal={(category) => {
+                      setSelectedCategory(category);
+                      setTaskCategory(false);
+                    }}
+                  />
                 )}
               </TouchableOpacity>
 
@@ -133,13 +127,15 @@ export default function ScreenAddTask({ closeModal }) {
                   source={require("../../assets/Home Screen/flag03.png")}
                   style={[styles.fotterImg]}
                 />
-                
-                {TaskPriority && (<TaskPriorityScreen
-                  closeModal={(priority) => {
-                    setSelectedPriority(priority);
-                    setTaskPriority(false);
-                  }}
-                />)}
+
+                {TaskPriority && (
+                  <TaskPriorityScreen
+                    closeModal={(priority) => {
+                      setSelectedPriority(priority);
+                      setTaskPriority(false);
+                    }}
+                  />
+                )}
               </TouchableOpacity>
 
               <TouchableOpacity onPress={handleAddTask}>
@@ -158,7 +154,7 @@ export default function ScreenAddTask({ closeModal }) {
 
 const styles = StyleSheet.create({
   modalBackground: {
-    flex: 1, // Adjusted to occupy the whole screen
+    flex: 1,
     flexDirection: "column",
     backgroundColor: "#363636",
     marginTop: 350,
@@ -191,8 +187,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     borderColor: "white",
-    borderWidth: 1, // width of the border
-    padding: 10, // internal padding
+    borderWidth: 1,
+    padding: 10,
     borderRadius: 8,
   },
   keyboardAvoidingContainer: {

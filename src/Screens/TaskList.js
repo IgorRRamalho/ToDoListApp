@@ -9,8 +9,7 @@ import {
   Image,
 } from "react-native";
 import { openDatabase } from "expo-sqlite";
-import { Lato_400Regular } from "@expo-google-fonts/lato";
-import { Ionicons } from "@expo/vector-icons"; // Importe os ícones de acordo com sua preferência
+import { Ionicons } from "@expo/vector-icons";
 
 const db = openDatabase("tasksDB");
 
@@ -40,9 +39,9 @@ const TaskList = () => {
 
   const handleToggle = (id) => {
     if (selectedTask === id) {
-      setSelectedTask(null); // Desmarca se já estiver marcado
+      setSelectedTask(null);
     } else {
-      setSelectedTask(id); // Marca a tarefa selecionada
+      setSelectedTask(id);
     }
   };
 
@@ -54,8 +53,8 @@ const TaskList = () => {
           [selectedTask],
           () => {
             console.log("Tarefa movida para concluídos:", selectedTask);
-            setSelectedTask(null); // Limpa a tarefa selecionada
-            fetchTasks(); // Atualiza a lista de tarefas
+            setSelectedTask(null);
+            fetchTasks();
           },
           (error) => {
             console.error("Erro ao mover a tarefa para concluídos:", error);
@@ -72,7 +71,7 @@ const TaskList = () => {
         [taskId],
         () => {
           console.log("Tarefa excluída:", taskId);
-          fetchTasks(); // Atualiza a lista de tarefas após a exclusão
+          fetchTasks();
         },
         (error) => {
           console.error("Erro ao excluir a tarefa:", error);
@@ -205,8 +204,6 @@ const TaskStyles = StyleSheet.create({
     justifyContent: "space-between",
     width: 320,
     height: 29,
-
-    
   },
   taskDescription: {
     paddingTop: 4,
@@ -250,7 +247,7 @@ const TaskStyles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderColor: "#8687E7",
-    
+
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -280,7 +277,7 @@ const TaskStyles = StyleSheet.create({
     height: 29,
     fontSize: 16,
     color: "#E8E8E8",
-    marginRight:10
+    marginRight: 10,
   },
   contentTags: {
     flexDirection: "row",

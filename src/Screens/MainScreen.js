@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Text, Image } from "react-native";
-import Header from "../MainScreen/Header";
 import Main from "../MainScreen/Main";
 import Fotter from "../MainScreen/Fotter";
 import TaskList from "./TaskList";

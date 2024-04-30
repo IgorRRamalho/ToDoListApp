@@ -32,11 +32,7 @@ export default function TaskPriorityScreen({ closeModal }) {
   };
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      onRequestClose={closeModal}
-    >
+    <Modal animationType="slide" transparent={true} onRequestClose={closeModal}>
       <View style={styles.modalBackground}>
         <View style={styles.viewModal}>
           <View style={styles.headerView}>

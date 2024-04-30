@@ -8,24 +8,23 @@ import {
   Image,
   View,
   Platform,
-  
 } from "react-native";
 
-import { Ionicons } from "@expo/vector-icons";
-import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
-import * as ImagePicker from 'expo-image-picker';
+import { AntDesign } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 
 export default function NewCategory({ closeModal, addNewCategory }) {
   const [newCategoryName, setNewCategoryName] = useState("");
-  const [selectedColor, setSelectedColor] = useState(null); // Adicionando o estado para a cor selecionada
+  const [selectedColor, setSelectedColor] = useState(null);
   const [imageSource, setImageSource] = useState(null);
 
   useEffect(() => {
     (async () => {
-      if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Permission to access media library is required!');
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Permission to access media library is required!");
         }
       }
     })();
@@ -44,9 +43,8 @@ export default function NewCategory({ closeModal, addNewCategory }) {
     }
   };
 
-
   const handleSaveCategory = () => {
-    addNewCategory(newCategoryName, selectedColor); // Chame a função para adicionar nova categoria e a cor selecionada
+    addNewCategory(newCategoryName, selectedColor);
     closeModal();
   };
 
@@ -64,9 +62,7 @@ export default function NewCategory({ closeModal, addNewCategory }) {
         ]}
         onPress={() => setSelectedColor(isSelected ? null : color)}
       >
-        {isSelected && (
-          <Ionicons name="checkmark-circle" size={40} color="#FFF" />
-        )}
+        {isSelected && <AntDesign name="check" size={24} color="#FFFFFF" />}
       </TouchableOpacity>
     );
   };
@@ -89,7 +85,7 @@ export default function NewCategory({ closeModal, addNewCategory }) {
               placeholderTextColor={"#979797"}
               onChangeText={setNewCategoryName}
               style={styles.input}
-              value={newCategoryName} // Controlled component
+              value={newCategoryName}
             />
           </View>
           <Text style={styles.text}>Category icon:</Text>
@@ -195,7 +191,6 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 4,
     marginHorizontal: 18,
-   
   },
   buttonCreate: {
     width: 160,

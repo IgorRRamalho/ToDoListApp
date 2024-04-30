@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    //  backgroundColor: "red",
     marginTop: 120,
   },
   mainText: {
