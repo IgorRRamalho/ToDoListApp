@@ -1,3 +1,0 @@
-NA PASTA MAIN SCREEN TEM O MAIN, HEADER E FOTTER DA TELA PRINCIPAL. 
-O 3 SÃO PUXADOS NA TELA MainScreen.js e a essa tela é puxada pelo App.js
-
